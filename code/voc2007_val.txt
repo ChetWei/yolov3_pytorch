@@ -1,0 +1,451 @@
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009823.jpg 8,3,4,498,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001270.jpg 5,31,126,448,234
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007167.jpg 4,9,98,347,219 4,51,107,500,306 10,338,114,388,171 10,198,113,224,138
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007615.jpg 11,297,43,428,365 11,141,160,291,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002221.jpg 10,148,58,375,453 3,212,19,366,100 3,1,19,138,281 10,1,74,49,316 16,118,22,375,229 18,179,2,195,51
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004136.jpg 14,71,101,451,338 10,146,32,323,368 4,447,36,500,91 4,342,26,394,49 4,205,18,281,59 4,83,19,132,39 4,50,21,86,36 4,20,19,43,35 4,311,29,344,44 1,141,1,314,45
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008718.jpg 10,373,130,449,359 10,355,159,374,199 10,328,163,349,209 12,1,4,348,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002209.jpg 17,72,72,500,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003936.jpg 4,34,202,190,259
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004903.jpg 15,37,126,374,301 4,335,55,472,159 4,440,95,500,247 4,441,53,500,81
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009566.jpg 11,146,150,304,232
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000218.jpg 8,253,64,383,255 3,107,1,202,174 10,1,1,253,222
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003705.jpg 17,196,100,270,176
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003063.jpg 10,54,9,291,485 15,3,43,372,386
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000973.jpg 14,30,51,488,331
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009764.jpg 1,242,131,482,340 1,31,86,242,352
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009002.jpg 12,35,29,445,206
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002625.jpg 4,114,297,159,314 4,42,294,88,313 10,167,283,176,325 10,107,288,116,313 10,98,291,109,326 10,84,285,100,335 10,426,286,446,339 10,36,287,43,315
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006442.jpg 10,2,29,195,500 10,130,181,347,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009942.jpg 10,11,1,221,207 10,2,9,365,332 10,265,2,500,332
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008484.jpg 4,1,1,407,315
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000966.jpg 12,42,48,493,312 10,308,149,337,189
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007953.jpg 10,312,167,327,214 10,258,192,284,217 10,220,193,240,220 10,193,176,213,220 10,105,171,126,221 10,125,178,143,223 10,86,174,104,226 10,68,168,89,226 10,41,175,57,228 10,28,174,43,236 10,3,192,15,241 10,12,195,27,227 10,264,215,319,298 10,155,250,190,290 10,196,365,282,392 10,95,210,136,270 10,121,210,151,249 10,51,237,92,292 10,70,259,115,339 14,144,355,208,395 14,188,296,245,309 14,76,299,107,366 14,125,245,144,298 14,95,247,128,303 14,256,274,321,309
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008645.jpg 9,210,153,300,308
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002340.jpg 4,100,136,384,284 4,107,116,152,135
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000543.jpg 4,22,86,433,344 4,23,96,91,146 4,298,87,500,243
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004916.jpg 10,30,34,334,333 18,355,244,464,333 19,119,87,169,148
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009598.jpg 11,160,157,246,358 11,199,135,413,302
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000379.jpg 14,46,16,443,341
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006734.jpg 4,164,126,479,367
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000806.jpg 10,119,275,333,500 10,1,298,106,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008296.jpg 4,52,103,500,324 4,401,54,447,83 4,352,61,394,85
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000184.jpg 9,289,106,338,192 9,375,144,403,188 9,458,154,480,190 9,2,1,312,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007833.jpg 9,371,2,459,141 11,141,222,277,318
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006252.jpg 8,136,86,486,303
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003855.jpg 13,243,139,389,229 10,264,105,331,209 10,32,111,97,210 10,156,119,221,213 14,130,164,235,225 14,16,154,104,218 14,306,34,352,58 14,201,41,245,66 10,311,11,344,50 10,208,13,238,59
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009388.jpg 19,314,173,386,233 19,259,153,320,219 3,234,265,417,375 19,100,177,163,252 18,54,228,73,279
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000347.jpg 2,77,2,411,348
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006681.jpg 6,65,228,86,258 6,244,222,262,250 6,309,220,330,246 6,351,214,372,245
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004280.jpg 18,182,183,297,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006440.jpg 13,307,137,500,305 10,270,123,313,266
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000019.jpg 0,231,88,483,256 0,11,113,266,259
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005606.jpg 18,10,145,96,301 10,10,41,291,373 10,100,67,495,373 10,20,84,75,144 10,65,109,117,172
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002169.jpg 10,3,102,318,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002155.jpg 13,38,19,499,303
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008478.jpg 14,1,169,53,245 14,24,160,100,240 14,134,161,207,215 4,94,138,422,306 4,373,131,500,227
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002627.jpg 15,101,221,238,298 15,240,229,356,342 19,22,211,79,275 3,204,300,322,347 3,29,348,122,460 16,4,335,375,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003539.jpg 13,78,149,213,349 13,298,144,417,341 13,422,123,493,231 10,294,75,432,316 10,82,64,226,327 10,412,78,461,201
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004281.jpg 12,270,1,500,375 10,447,260,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004295.jpg 4,36,11,453,351
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007575.jpg 1,15,1,473,235
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006131.jpg 19,289,95,446,264 19,416,115,500,284 19,1,107,138,277
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002425.jpg 15,137,186,375,500 3,22,151,120,290 10,32,63,108,256 10,75,102,130,266
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000597.jpg 10,310,163,356,220 10,459,168,497,208 10,386,177,465,314 3,230,211,274,270 3,302,242,370,320 3,404,234,468,308 3,488,254,500,295 3,36,225,95,304 19,195,181,235,212 19,112,192,139,238
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003667.jpg 5,16,45,421,445
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001064.jpg 2,13,34,267,203 10,140,14,215,128
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003868.jpg 10,2,235,500,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000391.jpg 6,57,47,465,458
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004849.jpg 12,143,191,250,281
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007824.jpg 0,148,162,440,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005799.jpg 19,390,170,430,220 10,244,146,297,229 10,189,163,248,228 10,411,114,500,373
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002019.jpg 4,43,82,500,298
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002757.jpg 12,75,57,467,370
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007363.jpg 4,32,98,419,264
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009414.jpg 15,61,60,471,350 10,298,201,412,328 10,107,97,323,350 10,136,17,236,140
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003887.jpg 7,175,443,212,472 7,215,434,236,459 7,269,426,283,454 7,223,441,258,468 7,238,446,265,477
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005414.jpg 13,59,105,217,333 13,265,121,443,333 10,196,40,290,330 10,283,55,433,330 13,432,95,487,150
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000236.jpg 11,88,169,275,314
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006135.jpg 12,221,143,266,183
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001470.jpg 19,103,30,311,234
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007773.jpg 1,153,277,211,311
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002151.jpg 0,29,1,305,327
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004253.jpg 3,141,192,252,337 3,181,163,267,291 3,274,182,352,308 3,328,154,358,197 16,167,179,348,332
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005171.jpg 9,189,227,276,269 9,124,260,141,279
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003299.jpg 5,2,3,499,260
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008125.jpg 1,2,1,335,450 10,142,146,232,241 10,44,153,136,241
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008680.jpg 1,223,166,316,218 4,335,140,500,359 4,4,195,178,310 4,174,207,286,266 4,275,202,354,248
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003886.jpg 5,24,79,458,228
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000343.jpg 4,25,74,489,323
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001713.jpg 7,35,64,479,356
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000419.jpg 13,23,39,486,322 10,2,16,41,221 10,61,1,109,62 10,459,2,500,174
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003110.jpg 8,213,127,275,266 8,121,107,188,234
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004694.jpg 10,49,71,203,255 13,95,185,202,466
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009617.jpg 3,393,238,472,375 3,295,219,368,340 3,149,214,230,340 3,151,205,208,324 3,71,340,136,375 3,16,241,107,352 3,238,179,266,262 3,266,177,292,254 16,78,181,197,344 16,358,190,444,256 10,182,157,235,235 10,213,143,251,209 10,170,143,208,186 10,120,145,170,200 10,88,138,133,204 10,62,156,107,177 10,72,181,106,237 10,48,161,67,194 10,5,142,129,350 10,291,147,320,198 10,294,152,348,211 10,314,169,393,326 10,470,170,500,316 10,355,156,479,363
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004441.jpg 7,114,155,174,199
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006530.jpg 3,40,176,192,282 15,216,180,500,330 3,244,262,500,375 3,47,167,77,208 3,3,168,41,251 3,59,159,85,175
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007612.jpg 8,94,189,258,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005788.jpg 15,2,1,500,347 10,148,32,358,262
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006295.jpg 2,38,123,171,221 2,337,97,447,186 2,198,103,370,202
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009173.jpg 19,167,1,375,128
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000396.jpg 4,86,170,353,259
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001922.jpg 5,65,75,470,269
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006718.jpg 14,91,193,122,258 10,76,147,101,255
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009417.jpg 17,62,29,144,93 17,216,183,299,266 17,238,94,330,220 17,136,54,164,94 17,368,15,401,36
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007572.jpg 16,479,195,500,317 16,2,97,315,234 18,213,51,233,106 18,171,68,192,137 18,184,64,204,135 18,40,100,67,181 18,19,99,38,174 18,55,93,82,156 3,312,93,348,148 3,285,110,334,177 3,224,127,273,267 3,164,148,222,194 3,412,157,433,169 3,440,127,485,227 3,473,104,500,205 3,477,90,500,110 10,265,46,491,333 10,4,53,235,331
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003066.jpg 11,139,170,255,270
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000221.jpg 4,72,77,432,253
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009205.jpg 4,1,9,107,113 4,1,47,491,251 4,1,128,311,329
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000989.jpg 19,52,117,109,177
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000750.jpg 10,22,2,375,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002635.jpg 11,137,109,419,281
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007765.jpg 11,26,111,294,498
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005416.jpg 8,1,25,469,439
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000591.jpg 10,2,192,32,265 10,20,185,68,250 10,48,190,76,252 10,75,191,100,280 10,108,179,143,250 10,473,199,489,234 3,174,197,197,238 3,153,193,180,239 3,227,195,245,234 16,188,202,220,238
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008873.jpg 5,90,80,237,264
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004898.jpg 10,146,17,252,303 10,93,159,160,291 6,273,173,307,213 6,383,197,429,262
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008720.jpg 0,93,235,250,386
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006719.jpg 4,420,46,500,170 4,241,40,404,195 4,1,86,40,179 4,150,40,209,73 4,221,40,266,70
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005210.jpg 19,74,55,205,188
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004867.jpg 12,3,70,500,305
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006241.jpg 3,387,164,489,372 3,1,162,52,341 18,183,103,210,183 16,49,135,440,375 3,96,299,334,375 3,286,99,398,133 3,104,111,195,169
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004481.jpg 4,42,167,465,376 10,150,81,250,243 10,268,115,358,239
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002732.jpg 8,81,4,325,242
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009129.jpg 15,80,67,480,326
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003362.jpg 2,174,122,282,263 10,171,44,294,226
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001207.jpg 11,125,77,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003376.jpg 3,114,264,216,375 3,369,210,485,375 18,458,305,479,375 10,192,118,302,375 10,415,192,500,324
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008223.jpg 17,129,12,500,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006781.jpg 0,7,10,220,367 0,67,39,136,92
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008784.jpg 4,479,146,500,169 4,429,139,484,168 4,412,146,444,168 4,383,144,409,167 4,301,140,338,165 4,200,140,235,170 4,150,140,194,169 4,110,141,146,175 4,44,141,93,172 4,2,144,40,169 9,337,155,355,189 9,267,154,289,193 9,245,158,265,195 9,231,154,252,202 9,199,154,220,193 9,146,156,171,193 9,48,158,72,196 4,324,131,382,170
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005539.jpg 0,164,36,458,351
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004948.jpg 6,210,237,294,347 6,127,213,203,336 6,163,123,220,217 6,227,130,284,221
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009288.jpg 10,59,73,131,195 10,72,64,127,251
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002450.jpg 8,47,131,281,329 10,238,1,472,318
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008430.jpg 10,81,12,464,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001414.jpg 10,15,87,43,196 10,40,88,65,128 10,324,84,362,130 10,428,86,465,153 10,475,93,500,234 4,40,64,458,313
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002647.jpg 4,221,174,306,212
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005128.jpg 9,122,138,401,206
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002653.jpg 9,2,12,456,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008381.jpg 10,62,46,463,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002684.jpg 2,71,47,447,493
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000093.jpg 8,175,125,344,254 3,53,3,500,338
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005699.jpg 9,155,217,346,310
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005841.jpg 7,23,219,212,461
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004034.jpg 8,102,118,375,458
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009504.jpg 13,105,106,324,482 10,137,51,395,442
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004746.jpg 12,266,54,492,297 12,29,55,241,293
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008801.jpg 10,139,13,311,368 13,426,1,500,171 4,401,1,500,88 4,193,1,390,79 4,95,14,311,99
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009470.jpg 15,2,11,500,262 0,19,112,227,156 0,229,123,468,211
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006025.jpg 5,21,119,449,232
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006794.jpg 5,92,117,373,203
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008550.jpg 4,55,107,377,324 4,371,40,459,119 10,440,31,475,190 10,261,21,336,125 10,139,33,201,115 10,224,18,263,112 10,190,15,224,75 10,118,29,151,121
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003439.jpg 7,263,177,420,295 7,86,89,279,295
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005704.jpg 16,387,174,500,255 16,327,263,500,375 16,7,162,134,290 10,437,113,492,178 10,352,130,433,273 10,279,198,390,307 10,270,232,408,374 10,197,294,322,375 10,74,82,220,302 10,58,121,100,173 10,7,131,57,179 10,1,143,32,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004195.jpg 2,22,184,187,312 10,89,156,129,241 10,149,220,199,309
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006033.jpg 10,4,12,227,500 10,178,44,372,494
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008744.jpg 10,125,128,265,325 2,131,180,270,383
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007477.jpg 9,259,30,421,154
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008036.jpg 8,186,68,422,330
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008988.jpg 12,2,95,375,329
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008817.jpg 10,274,13,412,374 13,5,36,465,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001614.jpg 7,158,43,436,372 7,100,231,154,319 7,416,100,500,364 7,367,252,440,315
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002889.jpg 10,235,61,309,333 10,144,68,238,330
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000720.jpg 8,217,118,305,263
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005102.jpg 10,1,199,54,271 4,1,167,50,219 4,104,170,166,216 4,200,173,319,222 4,270,181,406,241 4,303,185,500,274
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001365.jpg 11,322,139,416,189
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003214.jpg 4,230,143,496,220 4,206,151,345,216 4,167,161,252,211 4,137,163,213,210 4,106,164,184,210 4,83,167,156,208 4,68,180,125,207
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007072.jpg 7,2,25,394,372
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004221.jpg 11,240,155,321,240
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004976.jpg 10,311,108,476,221 10,224,98,350,226 10,177,132,247,263 10,43,139,196,332 16,128,193,500,338
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003162.jpg 13,25,89,483,355 10,115,11,353,223
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004816.jpg 8,113,37,365,294
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008235.jpg 12,48,127,337,284
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001577.jpg 3,414,86,486,164 16,180,92,429,163 16,104,163,500,375 10,1,3,220,344 10,79,1,225,177 10,268,33,316,74 10,313,12,363,108 10,362,3,427,124 10,424,36,456,76 3,477,75,500,148
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003412.jpg 13,60,131,332,500 10,131,62,332,440
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002042.jpg 2,75,182,260,360
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002730.jpg 4,186,88,385,294 10,220,131,270,184 10,244,112,295,144
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007853.jpg 11,86,177,350,452
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000876.jpg 0,117,31,376,329 0,261,14,398,132
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009852.jpg 0,153,121,482,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007843.jpg 4,49,306,471,450
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007670.jpg 13,244,28,486,285 13,19,79,265,275
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008741.jpg 14,4,4,374,499
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004609.jpg 8,174,179,375,412 10,2,100,320,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003760.jpg 13,175,223,231,322 13,118,227,180,296 10,24,211,46,273 10,47,207,75,284 10,73,209,100,284 10,82,199,100,273 10,94,192,115,282 10,118,188,176,298 10,176,178,238,317 10,246,204,274,311 10,286,206,308,305 10,304,204,327,305 8,309,273,358,311 10,330,217,356,287 10,362,218,392,305 10,394,220,414,308 10,414,198,445,307 10,344,201,366,304 10,238,199,255,249
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007089.jpg 8,43,46,468,270
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008345.jpg 7,199,165,257,254 7,328,174,412,278 7,369,147,446,232
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006427.jpg 10,265,47,500,375 10,27,49,297,375 10,1,153,22,195
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007088.jpg 5,185,160,457,277
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003588.jpg 3,200,63,324,319 3,66,82,185,330
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000903.jpg 10,41,25,407,366 3,30,117,323,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003007.jpg 4,29,2,500,296
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006619.jpg 5,110,128,222,195
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001837.jpg 10,32,187,54,229 10,332,199,375,330 10,64,193,248,487 3,284,360,374,500 3,49,301,261,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000334.jpg 4,37,110,273,178
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004152.jpg 18,153,45,375,426 18,117,329,291,500 18,1,31,203,317
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009112.jpg 8,35,57,361,298
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005728.jpg 10,132,61,194,192 7,280,142,406,248 2,149,114,231,250
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002047.jpg 15,210,225,295,285
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008218.jpg 10,194,90,495,375 10,124,334,164,375 10,100,273,139,361
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002906.jpg 12,149,195,293,380
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000863.jpg 12,171,39,472,283 12,12,16,151,284
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002910.jpg 3,264,123,426,314 3,89,123,232,285
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002086.jpg 19,281,78,405,179 19,31,134,139,237
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009886.jpg 0,87,67,395,305
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009676.jpg 4,459,146,500,246 10,259,65,351,128 10,121,63,183,114
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004193.jpg 19,144,187,246,287 18,277,70,289,111 18,290,68,305,107 3,216,289,380,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004178.jpg 8,80,98,309,298 8,282,77,500,267
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009312.jpg 13,137,148,401,375 10,90,78,197,324
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004150.jpg 0,75,247,314,440 19,15,73,248,347
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008805.jpg 2,60,143,348,450 10,159,117,279,284
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005312.jpg 0,111,53,364,366
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009528.jpg 0,86,67,489,322
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000242.jpg 0,3,3,499,287
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002441.jpg 0,43,64,500,362 19,2,88,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007908.jpg 1,191,2,500,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002864.jpg 10,3,15,76,93 10,1,2,159,142 10,44,18,234,361 10,253,18,500,346
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001404.jpg 0,57,22,443,361
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003549.jpg 14,4,41,192,202 14,159,48,350,215
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001388.jpg 15,2,2,500,414 10,61,9,432,400
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007921.jpg 4,58,257,234,351
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009918.jpg 8,118,123,287,333 10,182,30,465,234 10,51,1,182,107 10,1,1,268,330
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006395.jpg 19,408,35,479,188 10,134,117,316,347 3,17,183,213,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002454.jpg 4,100,73,263,200
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001607.jpg 8,21,1,500,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008838.jpg 1,122,45,334,278 4,360,181,382,200 10,104,184,115,201
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007458.jpg 3,330,222,500,375 3,225,146,292,189 3,97,162,212,267 16,132,157,481,375 19,224,39,291,100
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001001.jpg 0,62,64,325,375 10,315,102,427,356 10,169,1,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005298.jpg 10,16,100,166,333 10,246,43,371,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000647.jpg 5,166,69,443,234
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001559.jpg 4,197,185,224,215 4,146,175,183,226 4,131,190,149,203
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009887.jpg 6,267,276,300,323 6,222,261,265,316
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008541.jpg 10,40,107,64,138 10,199,153,242,243 10,2,80,147,336 10,315,55,382,172 10,292,57,500,335
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005930.jpg 14,48,81,213,197 10,12,16,48,176 10,412,97,443,136 10,64,7,170,180 14,411,119,454,151
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000860.jpg 4,81,85,428,292 10,224,35,281,86 10,298,45,358,115
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003343.jpg 8,167,82,407,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008799.jpg 5,22,50,500,298 5,51,197,164,249
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001795.jpg 10,178,141,301,281
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002505.jpg 7,1,12,348,373 7,145,13,437,274
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003948.jpg 10,91,19,206,178 2,112,43,183,196
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007284.jpg 4,78,72,385,207 10,198,90,217,116
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009524.jpg 10,316,84,376,193
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008606.jpg 8,114,75,348,360
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007247.jpg 4,100,93,494,291 4,450,223,500,318
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002459.jpg 10,121,205,192,237
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002101.jpg 8,142,360,333,487
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003223.jpg 9,136,230,230,299
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009733.jpg 4,75,4,479,319
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007078.jpg 6,34,127,66,170 6,132,124,153,151 3,252,126,375,216 15,360,153,500,370
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005451.jpg 10,238,103,375,500 10,156,357,237,466 10,131,372,162,410 10,78,362,137,479 10,15,358,78,454 16,80,396,220,495
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002458.jpg 13,22,150,102,203 10,39,131,69,185
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006602.jpg 8,92,121,205,237 10,202,365,293,489 10,22,254,85,445 10,99,365,191,465
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009531.jpg 10,221,219,245,252
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004954.jpg 17,24,153,381,482 10,104,30,416,436
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008001.jpg 4,196,47,266,125 4,252,25,500,131 4,393,86,500,151 4,52,96,458,282
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005531.jpg 3,169,210,257,359 3,255,176,289,261 3,192,179,262,326 3,248,216,356,360 6,163,51,218,186 16,106,195,375,348
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000887.jpg 5,25,49,473,247
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005928.jpg 13,388,103,500,337 13,2,153,104,375 13,84,149,156,245 13,214,136,326,331 10,289,77,334,201 10,212,89,331,298 10,144,85,207,315
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007873.jpg 15,1,153,487,360
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003397.jpg 10,232,197,334,315 4,15,168,258,321
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000885.jpg 14,13,333,349,456 10,11,12,485,456
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005057.jpg 14,167,112,355,312 10,178,38,334,278 14,1,222,64,309
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006238.jpg 19,278,112,404,224 10,258,1,358,139 10,40,11,317,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008942.jpg 17,20,179,176,295 17,189,190,286,283 17,301,199,419,276 17,351,186,390,210 17,391,183,426,207 17,299,191,355,223 17,146,182,192,206 17,61,181,189,284 17,1,201,55,283
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002512.jpg 8,28,29,172,244 8,82,40,298,296 8,258,128,450,347 14,1,188,299,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003618.jpg 10,219,105,271,226 10,225,119,245,165 10,58,140,90,193 2,156,160,390,265 2,212,133,305,175 2,57,154,92,223 2,1,167,12,211
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009094.jpg 19,235,81,394,227
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002670.jpg 8,22,143,374,429 15,2,2,375,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008374.jpg 19,258,223,320,294 19,323,216,403,288 10,185,181,271,375 10,292,202,369,373
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007721.jpg 11,214,103,429,299 4,1,268,500,372 4,36,172,290,271 4,2,230,206,281
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002659.jpg 9,161,8,231,310
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004228.jpg 4,42,71,429,262 4,1,44,53,141 4,40,56,122,87
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002881.jpg 18,394,341,426,425 10,85,43,323,470
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009042.jpg 8,116,92,406,194
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004770.jpg 10,83,2,335,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001191.jpg 17,1,3,298,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008823.jpg 15,58,114,500,290
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008770.jpg 5,185,106,337,190
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001768.jpg 0,1,63,261,344
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006761.jpg 7,131,193,348,322
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007899.jpg 18,227,25,255,112
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005042.jpg 14,158,205,302,462 14,4,182,147,428 10,155,37,328,399 10,1,46,157,394
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004360.jpg 10,18,65,333,500 10,203,97,315,262
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000847.jpg 16,1,279,208,500 10,61,111,296,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000880.jpg 11,305,24,355,65 11,51,239,87,322 11,116,158,141,206 7,379,119,440,199 7,329,114,380,179
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009126.jpg 1,19,40,490,268
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009456.jpg 14,227,207,458,375 14,2,142,111,275 10,26,78,104,290 10,450,214,493,315 10,412,184,442,284 10,428,197,459,261
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005481.jpg 12,1,54,466,277 4,211,40,250,63 4,177,36,219,59 4,153,28,206,54
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007527.jpg 4,28,372,60,404 4,237,377,316,425 4,284,390,355,428 4,313,390,443,431 4,210,389,240,416 4,182,380,233,417 4,157,384,191,414 4,133,382,177,411 4,108,381,149,408 4,79,382,111,405 4,73,382,87,404 4,60,379,83,404
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009278.jpg 14,81,280,121,326
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008166.jpg 9,151,178,349,236 9,351,143,411,176
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005318.jpg 4,109,37,421,291
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007902.jpg 13,320,49,486,154 13,1,57,232,316 10,367,1,458,110 10,1,48,189,213
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008370.jpg 11,57,63,311,485
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007731.jpg 4,26,189,340,474
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002649.jpg 10,2,105,191,320 10,107,103,294,320 10,225,108,349,318 10,313,43,463,320
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009734.jpg 1,120,97,353,263 1,466,149,500,223 1,376,166,398,191 10,395,181,458,326
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001427.jpg 14,153,199,270,341 14,249,159,332,275 10,229,58,319,266 10,159,114,267,297
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001341.jpg 11,114,65,450,308
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000513.jpg 9,162,127,290,190
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005325.jpg 9,277,250,326,309
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005457.jpg 4,64,123,387,274 10,426,26,447,45 10,479,24,499,43
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001816.jpg 0,1,36,369,250
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001194.jpg 14,72,180,281,340
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004601.jpg 13,151,100,266,317 10,200,43,332,308
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003620.jpg 0,74,1,451,257
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007491.jpg 15,233,153,500,337
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004365.jpg 4,57,78,484,282 4,357,104,500,212
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005912.jpg 11,245,71,345,284
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001590.jpg 18,148,223,231,450 19,303,40,375,324
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001545.jpg 5,132,171,338,240
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002702.jpg 3,89,189,333,500 3,1,274,100,500 3,77,199,278,429
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000667.jpg 2,287,362,415,466 2,271,362,410,476
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003408.jpg 15,298,259,500,375 15,2,287,261,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003636.jpg 1,184,222,258,298 4,283,272,344,325 4,185,265,237,308 4,158,273,217,317 4,7,284,271,371 4,4,319,123,375 4,302,247,355,309 4,282,238,378,277 4,356,232,406,256 4,355,241,391,262
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009333.jpg 19,100,86,312,238 8,207,202,352,268 15,85,235,500,276 3,291,285,500,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006772.jpg 10,243,58,419,349 10,88,70,270,349
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007295.jpg 0,119,141,397,287
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001828.jpg 3,35,1,304,238 10,2,33,289,445 10,38,123,298,440
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001627.jpg 10,104,7,280,475
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002448.jpg 10,169,93,279,281 2,41,146,360,435
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002845.jpg 17,284,196,326,216 17,14,265,175,347 17,140,199,186,235 17,220,210,248,229 17,254,204,279,227 17,230,201,256,220
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003554.jpg 5,75,126,436,250
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000707.jpg 19,93,150,134,187 19,292,289,363,500 3,78,176,139,281
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006404.jpg 7,121,232,176,270
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000060.jpg 4,1,137,427,333 4,1,62,479,235 4,1,27,422,141 4,44,7,458,134 4,199,6,475,98
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001430.jpg 16,1,269,250,374 10,100,154,235,286 10,211,146,303,352 10,245,154,398,374 6,56,174,100,220 19,316,1,418,66 6,344,83,428,214
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003233.jpg 5,1,78,498,344
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009911.jpg 5,75,137,417,265
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009905.jpg 5,43,97,465,236 5,1,146,100,216
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005859.jpg 10,2,3,298,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003743.jpg 15,84,145,292,273 15,1,163,63,280
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005326.jpg 10,197,197,237,269 10,341,176,361,235 10,440,183,453,210 10,424,184,438,216 10,397,185,412,200 7,60,223,181,283 7,34,225,143,277 7,257,215,337,262 7,235,220,263,248 7,379,199,412,231 7,361,197,383,229 7,413,193,427,216
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007294.jpg 4,270,172,361,252
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000302.jpg 4,488,276,500,320 4,475,251,486,273 4,279,225,478,340 4,245,230,316,280 4,1,241,87,375 10,133,244,184,367 13,121,273,213,367
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004170.jpg 9,77,189,411,250 10,335,153,368,207 10,312,174,342,214 10,125,140,157,196 10,156,143,211,219 10,185,140,213,218
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006029.jpg 19,2,52,51,121 10,140,33,175,99 10,26,39,174,142 10,132,33,217,136 6,225,46,252,82 6,252,38,283,72 6,358,14,442,68 3,261,39,377,124 15,1,109,500,375 10,150,132,490,307 8,52,217,371,309
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008951.jpg 8,3,17,375,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004831.jpg 10,111,29,361,318
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007109.jpg 2,150,2,500,332 10,1,72,211,332
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000882.jpg 8,82,37,500,357
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007647.jpg 13,22,240,131,337 10,30,181,113,303 4,111,236,333,335
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005905.jpg 10,194,2,359,283 10,2,2,246,283
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009816.jpg 17,87,227,157,269 17,151,219,193,241 17,235,214,283,259 17,319,205,367,238 17,396,186,454,220 17,426,179,474,211 17,482,173,500,209 17,308,191,356,220 17,242,204,293,227
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000601.jpg 6,300,1,500,168 6,168,34,420,190 6,1,57,450,348
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001537.jpg 10,414,87,500,243 16,363,241,500,313 10,104,16,367,332 18,385,212,408,278
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009619.jpg 8,210,137,306,251
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003452.jpg 16,86,300,257,471 3,173,328,325,500 3,61,282,90,414 3,70,301,185,475 3,109,267,150,306 3,213,274,247,320 3,263,287,311,338
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001906.jpg 0,103,147,393,272
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004671.jpg 18,49,1,283,497
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005209.jpg 4,82,75,416,299
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003122.jpg 18,5,265,116,340 18,412,254,437,318 10,33,78,192,375 10,176,85,352,375 10,309,68,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000359.jpg 8,263,266,388,479 10,25,13,288,481 3,39,84,420,426
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005355.jpg 12,7,116,426,298 12,451,183,492,216
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002176.jpg 15,79,92,500,404 10,96,29,465,389 6,20,2,366,122 6,337,1,500,124
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008467.jpg 8,68,153,251,433 10,179,12,375,486 10,1,109,155,277 18,245,61,255,96 18,172,60,179,95 18,149,58,163,92 18,123,61,128,91 18,110,60,117,92 18,88,60,97,90
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008315.jpg 1,165,160,456,312 4,454,234,500,272 4,477,238,500,297 10,365,245,406,319 13,359,270,408,341
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007740.jpg 18,197,136,266,363 18,279,75,337,326 18,356,196,383,290 18,239,144,318,353
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007999.jpg 15,93,210,456,375 6,1,1,295,375 6,298,1,394,282 19,385,154,429,188
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007033.jpg 5,1,4,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006305.jpg 0,205,77,429,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004274.jpg 19,272,5,500,298 6,1,1,270,298
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003296.jpg 10,2,58,252,374 10,218,58,500,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005803.jpg 16,67,156,433,273
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008670.jpg 11,56,115,254,263 11,60,279,252,397
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001640.jpg 4,47,23,461,358 4,451,75,500,127 10,413,39,441,131 4,397,52,460,106 10,50,56,64,90
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005340.jpg 9,219,18,360,238
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002407.jpg 0,43,16,300,495
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004710.jpg 18,146,1,355,248 18,38,2,169,79
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005383.jpg 10,80,2,399,319
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008062.jpg 11,2,69,383,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006067.jpg 5,41,184,291,257
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003679.jpg 11,38,53,432,302
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001522.jpg 18,309,46,377,241 18,217,100,272,247
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007621.jpg 17,301,102,411,202 17,175,113,285,209
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005961.jpg 1,58,391,294,485 10,306,431,324,478 10,333,426,351,477 10,360,419,375,472 10,115,421,166,500 10,1,425,25,500 10,25,457,75,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009197.jpg 8,104,93,467,357 10,47,1,186,348 10,199,1,362,353
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006918.jpg 4,149,112,418,300 4,1,147,172,230
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001911.jpg 5,254,123,400,213
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006065.jpg 8,4,29,500,287
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001050.jpg 10,235,126,297,241 14,234,174,295,269
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005418.jpg 7,216,97,432,312
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009034.jpg 13,346,98,401,203 13,390,112,430,184 13,278,103,362,276 13,410,131,485,241 13,84,149,181,332 13,161,215,270,374 13,29,93,77,153 10,253,66,307,124 10,218,64,261,125 10,150,78,199,128 10,144,75,176,115 10,431,64,481,244 10,461,64,500,318 10,33,92,125,312 10,132,78,308,368
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003524.jpg 11,34,39,418,480
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001333.jpg 13,156,176,203,242 10,189,127,215,197 10,155,139,202,196
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001455.jpg 14,125,176,345,374 10,147,124,300,345 10,51,125,92,187 10,100,122,153,182 4,415,89,500,126
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007781.jpg 6,1,42,419,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006886.jpg 3,19,42,214,206 15,218,38,496,215
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007568.jpg 10,35,1,466,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008698.jpg 10,2,29,287,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009586.jpg 7,170,355,205,390
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004129.jpg 0,2,34,460,319
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006058.jpg 4,1,107,499,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003120.jpg 19,223,162,281,209 16,374,280,500,375 3,401,268,434,307 3,169,241,251,335 15,13,214,159,327
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004673.jpg 14,52,154,159,308 10,80,66,204,270
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007408.jpg 12,1,10,341,408 10,345,243,364,309 10,313,244,356,341
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001092.jpg 8,131,63,456,332 10,449,1,500,334
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001521.jpg 10,45,396,188,500 10,134,131,230,462 2,195,164,292,422
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005960.jpg 0,94,284,166,370
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009192.jpg 19,76,29,415,336
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005970.jpg 0,93,114,333,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005743.jpg 8,73,94,220,219 15,2,86,258,227
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002986.jpg 17,1,38,141,200 17,1,176,190,375 17,226,143,365,311 17,318,128,468,300 17,236,209,500,375 17,388,32,475,120 17,444,5,500,96 17,161,73,256,166 17,201,74,359,233 17,282,66,327,99 17,100,1,211,91 17,1,1,100,39 17,384,1,486,72 17,210,1,303,63 17,302,1,369,61
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006538.jpg 12,119,94,308,258
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004307.jpg 2,171,87,454,262 2,61,96,295,245
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002004.jpg 19,37,111,190,275 19,204,157,322,301 19,5,279,103,419
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006262.jpg 0,43,98,481,257
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003681.jpg 17,336,59,500,351 17,288,81,408,284 17,99,103,221,272 8,213,138,284,283 8,100,156,206,330 8,1,159,121,326 8,204,153,368,326 17,1,84,109,158
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000439.jpg 12,1,168,308,209
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002212.jpg 11,42,72,459,247
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001690.jpg 10,333,55,405,286 2,40,101,182,292
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007544.jpg 19,294,109,341,142 3,340,163,482,311 3,190,188,274,344 3,124,190,192,347 3,54,206,132,372 3,57,177,118,222 3,185,171,221,217 16,2,201,225,311
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001653.jpg 12,178,119,346,302 12,1,95,156,351
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008105.jpg 4,22,71,472,326 4,380,39,443,64 4,291,37,384,65 4,281,65,500,193 4,215,40,304,74 4,65,46,193,104 4,1,54,66,135 4,1,33,58,71 4,54,34,111,68 4,121,32,183,51 4,264,30,309,54 4,1,244,40,375 10,454,13,500,104 10,433,24,446,48 10,416,22,432,41 10,378,20,400,46 10,359,19,379,48 10,350,21,354,34 10,335,17,351,39 10,284,20,295,32 10,247,18,257,31 10,263,18,277,30 10,181,14,222,66
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008139.jpg 18,13,342,69,411 18,475,152,500,224 10,1,34,254,401 10,165,11,500,411
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000954.jpg 11,1,130,399,322 11,1,1,118,32
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003253.jpg 8,8,126,249,405 8,313,19,500,304 10,1,1,500,426
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000982.jpg 5,67,37,345,345 10,410,313,500,377 10,267,121,291,140 10,328,120,367,207
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007974.jpg 0,1,2,313,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009781.jpg 13,111,65,462,298 10,224,33,394,269
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003051.jpg 4,30,82,283,207
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006868.jpg 4,79,185,341,372 4,1,189,42,337 4,52,193,168,259 4,45,187,122,221 10,235,181,325,372
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001875.jpg 19,36,138,143,234
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006698.jpg 10,245,1,495,375 10,70,128,387,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001691.jpg 1,388,2,500,124 1,273,1,390,78 1,82,2,189,63 10,455,23,480,99 10,323,29,349,98 10,233,32,258,85 10,207,29,230,82 10,190,46,208,82 10,130,32,153,66 10,59,27,79,65 10,77,18,97,64 10,48,26,61,67 10,35,29,54,68 10,1,18,19,69 10,16,20,37,70
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006061.jpg 0,213,7,500,200 0,207,185,280,374 18,170,1,210,61 18,106,1,157,56 19,255,206,500,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001915.jpg 11,213,177,267,232 11,22,220,87,265
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008931.jpg 18,218,257,281,374 18,43,211,82,353 3,376,281,404,374 10,111,117,274,374 10,249,122,390,374 10,70,140,171,318 10,1,136,93,299 10,307,2,460,374
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005971.jpg 10,8,109,341,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002952.jpg 19,122,253,437,374 0,244,94,354,170 0,93,113,433,284
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005032.jpg 12,23,66,267,404
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003331.jpg 4,161,140,313,226 4,438,134,500,179 4,101,145,190,181 4,280,139,351,171 4,422,121,480,153 10,346,119,358,153 10,337,118,348,150 10,210,153,229,168 10,254,150,277,166
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008927.jpg 7,203,238,266,317
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003127.jpg 0,3,2,499,350
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008072.jpg 16,81,191,329,322 10,293,106,348,175 10,385,109,450,182 10,272,127,397,318 10,135,102,203,198 10,189,92,257,185 10,68,99,154,212 10,3,97,148,325 3,273,233,439,325 3,370,182,433,250
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005224.jpg 6,1,86,52,307 6,36,90,480,304
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009350.jpg 4,8,289,336,475
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001718.jpg 8,97,14,439,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005393.jpg 5,53,46,432,175
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001877.jpg 4,1,53,498,308
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008884.jpg 10,149,179,208,375 10,203,201,252,368 9,2,3,369,259
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009230.jpg 10,126,46,326,250 13,1,100,361,375
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/001485.jpg 13,43,105,334,300 10,109,33,251,299 10,45,183,169,333
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005191.jpg 16,62,128,500,285 16,33,206,445,375 3,470,125,500,184 3,381,120,433,158 3,205,108,249,134 3,24,143,85,223 3,99,144,151,216 3,160,142,210,208 3,207,126,245,223 3,237,127,268,230 3,254,131,292,242 3,282,142,358,278 3,347,153,426,330 3,414,171,500,374 3,340,230,451,344 3,271,213,336,276
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003537.jpg 12,75,46,473,240 12,2,154,74,232
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008338.jpg 1,26,5,486,140
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005608.jpg 13,1,226,303,462 10,31,146,199,441 10,97,181,241,321
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003279.jpg 15,174,85,500,270
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000017.jpg 10,185,62,279,199 2,90,78,403,336
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004517.jpg 10,2,98,355,500
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005609.jpg 4,15,29,482,315 4,313,3,500,147 4,160,5,323,100 4,299,2,454,56 4,61,3,136,47 4,1,29,70,143
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/006472.jpg 19,48,1,500,312
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/007022.jpg 11,146,101,266,179
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002199.jpg 8,69,163,477,372
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009557.jpg 14,121,275,199,365 10,116,216,181,365
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/003085.jpg 0,174,81,327,266
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/005219.jpg 10,97,60,160,255 10,276,111,308,215 10,290,140,363,245 10,346,108,373,181 10,363,111,403,202 10,322,116,346,155
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/004649.jpg 12,36,126,393,237 12,381,134,431,225 12,425,131,486,199
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/002238.jpg 2,240,129,305,246 10,235,91,300,231
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/009392.jpg 1,410,194,500,331 4,249,230,294,247 4,215,223,249,237 4,173,223,206,237 4,290,223,314,233 4,19,224,51,238 4,1,283,74,331
+/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/008517.jpg 4,1,2,345,333
