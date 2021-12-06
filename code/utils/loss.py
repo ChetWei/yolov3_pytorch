@@ -112,7 +112,8 @@ def build_targets(p, targets, model):
     # [[0.0000, 0.0000, 0.4662, 0.5317, 0.1663, 0.2092, 2.0000],
     #  [0.0000, 2.0000, 0.3129, 0.6461, 0.2430, 0.2092, 2.0000]]])
     for i, yolo_layer in enumerate(model.yolo_out_layer):
-        anchors = yolo_layer.anchors / yolo_layer.stride  # anchor以单元格为长度单元
+        anchors = yolo_layer.anchors.to(targets.device)
+        anchors = anchors / yolo_layer.stride  # anchor以单元格为长度单元
         # 设置 feature_w,feature_h,feature_w,feature_h
         gain[2:6] = torch.tensor(p[i].shape)[[3, 2, 3, 2]]  # xyxy gain[2:6]  tensor([13, 13, 13, 13])
         # 计算坐标在特征图上的位置,其他属性乘以1了，不会有影响

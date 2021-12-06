@@ -54,7 +54,7 @@ def convert_voc_annotaion(segment_file, classname_file, target_file):
 if __name__ == '__main__':
 
     voc_names = "../../config/voc_names.txt"
-    VOCdevkt_path = "/Users/weimingan/work/dataset/VOCdevkit"  #需要修改的
+    VOCdevkt_path = "/media/root/5A72B65672B6371B/weimingan/dataset/VOCdevkit"  #需要修改的
     voc_annotations_path = VOCdevkt_path + "/VOC2007/Annotations"
     voc_img_home = VOCdevkt_path + "/VOC2007/JPEGImages"
     segment_train_file = VOCdevkt_path + "/VOC2007/ImageSets/Main/train.txt"

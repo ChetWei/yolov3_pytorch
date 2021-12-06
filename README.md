@@ -36,3 +36,9 @@ torch.Size([1, 75, 52, 52])
 ## 5.测试map
 
 ## 5.图片检测、视频检测
+
+
+## 服务器运行
+```shell
+nohup python  -u  train.py  > ./train.log 2>&1 &
+```

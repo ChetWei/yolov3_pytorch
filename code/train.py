@@ -70,14 +70,14 @@ def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_
 
 def run():
     parser = argparse.ArgumentParser(description="Trains the YOLO model.")
-    parser.add_argument('--cuda_id', type=int, default=0, help="使用的gpu")
+    parser.add_argument('--cuda_id', type=int, default=1, help="使用的gpu")
     parser.add_argument('--model_name', type=str, default="yolov3", help="保存模型名称")
     parser.add_argument('--label_path', type=str, default="./voc2007_train.txt", help="设置label文件的路径")
-    parser.add_argument('--num_workers', type=int, default=0, help="加载数据进程数量")
-    parser.add_argument('--batch_size', type=int, default=1, help="batch的大小")
+    parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
+    parser.add_argument('--batch_size', type=int, default=16, help="batch的大小")
     parser.add_argument('--lr', type=float, default=0.0001, help="学习率")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--epochs", type=int, default=100, help="训练轮次")
+    parser.add_argument("--epochs", type=int, default=1000, help="训练轮次")
     parser.add_argument("--num_classes", type=int, default=20, help="训练数据集的类别个数")
     parser.add_argument("--weight_dir", type=str, default="./weights", help="模型权重保存目录")
     parser.add_argument("--logdir", type=str, default="./logs", help="tensorboard保存目录")
@@ -112,7 +112,7 @@ def run():
                                                 num_workers=args.num_workers)
 
     for epoch in range(args.epochs):
-        train_one_epoch(model, dataloader, optimizer, device, epoch, args.epochs, epoch_steps, writer)
+        train_one_epoch(model, dataloader, optimizer, device, epoch, args.epochs, epoch_steps/args.batch_size, writer)
 
         if ((epoch + 1) % 100 == 0):
             save_model(model, args.model_name, (epoch + 1), weights_dir=args.weight_dir)
