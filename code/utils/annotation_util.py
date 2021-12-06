@@ -3,12 +3,6 @@
 import os
 import xml.etree.ElementTree as ET
 
-voc_names = "/Users/weimingan/work/python_code/myyolo/yolov3_pytorch/config/voc_names.txt"
-voc_annotations_path = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/Annotations"
-voc_img_home = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages"
-segment_train_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/train.txt"
-segment_val_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/val.txt"
-
 
 def get_classes_name(path):
     with open(path, "r") as f:
@@ -58,4 +52,15 @@ def convert_voc_annotaion(segment_file, classname_file, target_file):
 
 
 if __name__ == '__main__':
-    convert_voc_annotaion(segment_file=segment_train_file, classname_file=voc_names, target_file='../voc2007_train.txt')
+
+    voc_names = "../../config/voc_names.txt"
+    VOCdevkt_path = "/Users/weimingan/work/dataset/VOCdevkit"  #需要修改的
+    voc_annotations_path = VOCdevkt_path + "/VOC2007/Annotations"
+    voc_img_home = VOCdevkt_path + "/VOC2007/JPEGImages"
+    segment_train_file = VOCdevkt_path + "/VOC2007/ImageSets/Main/train.txt"
+    segment_val_file = VOCdevkt_path + "/VOC2007/ImageSets/Main/val.txt"
+
+    convert_voc_annotaion(
+        segment_file=segment_train_file,
+        classname_file=voc_names,
+        target_file='../voc2007_train.txt')

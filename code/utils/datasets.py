@@ -25,11 +25,11 @@ class ListDataSet(Dataset):
         # 将图片resize成输入的尺寸
         resized_img = new_im.resize(self.input_shape, Image.BICUBIC)
 
-        scale_w,scale_h = self.input_shape[0] / new_im.size[0] ,  self.input_shape[1] / new_im.size[1]
+        scale_w, scale_h = self.input_shape[0] / new_im.size[0], self.input_shape[1] / new_im.size[1]
 
         #  并调整坐标形式 xyxy -> xywh， 将根据padding调整box ,再归一化,
         boxes = np.array([box.split(",") for box in line_splited[1:]], dtype=np.float32)
-        boxes = adjust_box(boxes, pad_w, pad_h,scale_w,scale_h, self.input_shape)
+        boxes = adjust_box(boxes, pad_w, pad_h, scale_w, scale_h, self.input_shape)
 
         # -------------验证调整情况-------------
         # draw = ImageDraw.Draw(resized_img)
@@ -45,12 +45,28 @@ class ListDataSet(Dataset):
         image_data = normalize_img(np.array(resized_img, dtype=np.float32))
         # 转为tensor数据 默认放在cpu上
         image_tensor = transforms.ToTensor()(image_data)  # 自动转换为 H,W,3 -> 3,H,W
-        box_tensor = transforms.ToTensor()(boxes)
-
-        return image_tensor, box_tensor
+        # 在bbox上增加一个值，用来表示当前数据属于当前batch的第几个，存batch_id
+        bb_targets = torch.zeros(len(boxes), 6)
+        bb_targets[:, 1:] = transforms.ToTensor()(boxes)
+        # box xywh 是归一化数据
+        return image_tensor, bb_targets
 
     def __len__(self):
         return len(self.lines)
+
+    def collate_fn(self, batch):
+        imgs, bb_targets = list(zip(*batch))
+        # 设置数据在这个batch中的batchid
+        imgs = torch.stack(imgs)
+
+        for i, boxes in enumerate(bb_targets):
+            boxes[:, 0] = i
+        # 将这个batch的多个数据，整合在一起 （nums,6）,因为数据里面设置了对应的batchid 所以后面可以找到属于哪个batch
+        bb_targets = torch.cat(bb_targets, dim=0)
+
+        # imgs (batchsize,3,416,416)
+        # bb_targets (num,6)
+        return imgs, bb_targets
 
 
 def pad2square(pil_img):
@@ -63,11 +79,11 @@ def pad2square(pil_img):
     return pad_w, pad_h, new_im
 
 
-def adjust_box(bboxs, pw, ph, scale_w,scale_h,input_shape):
+def adjust_box(bboxs, pw, ph, scale_w, scale_h, input_shape):
     # 调整点 xyxy
-    bboxs[:, [1,3]] = bboxs[:, [1,3]] + pw
-    bboxs[:, [2,4]] = bboxs[:, [2,4]] + ph
-    #resize
+    bboxs[:, [1, 3]] = bboxs[:, [1, 3]] + pw
+    bboxs[:, [2, 4]] = bboxs[:, [2, 4]] + ph
+    # resize
     bboxs[:, [1, 3]] = bboxs[:, [1, 3]] * scale_w
     bboxs[:, [2, 4]] = bboxs[:, [2, 4]] * scale_h
 
@@ -94,5 +110,5 @@ def normalize_img(image):
 
 if __name__ == '__main__':
     lable = "/Users/weimingan/work/python_code/myyolo/yolov3_pytorch/code/voc2007_train.txt"
-    dataset = ListDataSet(labels_file=lable,input_shape= [416, 416])
+    dataset = ListDataSet(labels_file=lable, input_shape=[416, 416])
     dataset.__getitem__(5)
