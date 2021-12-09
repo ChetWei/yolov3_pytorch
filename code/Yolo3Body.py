@@ -55,11 +55,13 @@ def make_last_layers(filters_list, first_in_filter, final_out_filter):
 
 
 class YOLOV3(nn.Module):
-    def __init__(self, cls_num, anchors, img_size=416):
+    def __init__(self, cls_num, anchors, img_size=416,training=True):
         """
         :param cls_num: 类别个数
         """
         super(YOLOV3, self).__init__()
+        self.training = training
+
         # 生成darknet53的主干网络
         # 输入尺寸 412x412
         # 获得darknet53的最后三个特征层输出 shape
@@ -103,9 +105,9 @@ class YOLOV3(nn.Module):
             final_out_filter=3 * (self.cls_num + 5)
         )
 
-        self.yolo_out_layer = [YoloOutLayer(anchors[0], self.cls_num, self.img_size),
-                                YoloOutLayer(anchors[1], self.cls_num, self.img_size),
-                                YoloOutLayer(anchors[2], self.cls_num, self.img_size)]
+        self.yolo_out_layer = [YoloOutLayer(anchors[0], self.cls_num, self.img_size,self.training),
+                               YoloOutLayer(anchors[1], self.cls_num, self.img_size,self.training),
+                               YoloOutLayer(anchors[2], self.cls_num, self.img_size,self.training)]
 
     def forward(self, x):
         #  获得三个有效特征层，他们的shape分别是：
@@ -149,13 +151,20 @@ class YOLOV3(nn.Module):
         out1 = self.yolo_out_layer[1](head_out1)
         out2 = self.yolo_out_layer[2](head_out2)
 
-        return out0, out1, out2
+        yolo_outputs = [out0, out1, out2]
+
+        #训练和测试返回的数据维度不一样
+        if self.training:
+            return out0,out1,out2
+
+        return torch.cat(yolo_outputs,1)
+
 
 
 class YoloOutLayer(nn.Module):
     "检测之前的预数据处理"
 
-    def __init__(self, anchors, num_classes, img_size):
+    def __init__(self, anchors, num_classes, img_size,trainnig):
         """
         :param anchors: [[w,h],[w,h],[w,h]]
         :param num_classes: 类别个数
@@ -165,6 +174,8 @@ class YoloOutLayer(nn.Module):
         self.num_classes = num_classes
         self.num_attr = num_classes + 5
         self.img_size = img_size  # 图片尺寸 默认是正方形
+        self.training = trainnig
+        self.grid = torch.zeros(1)
         #
         anchors = torch.tensor(list(chain(*anchors))).float().view(-1, 2)
         self.register_buffer('anchors', anchors)
@@ -180,28 +191,35 @@ class YoloOutLayer(nn.Module):
         # [bs, 75, 13, 13] -> [bs,3,25,13,13] -> [bs,3,13,13,25]
         x = x.view(bs, self.num_anchors, self.num_attr, feature_h, feature_w).permute(0, 1, 3, 4, 2).contiguous()
 
+        #如果不是训练，修改数据返回形式
+        if not self.training:
+            if self.grid.shape[2:4] != x.shape[2:4]:
+                self.grid = self._make_grid(feature_w, feature_h).to(x.device)
+
+            x[..., 0:2] = (x[..., 0:2].sigmoid() + self.grid) * stride  # xy由偏移量转为绝对像素值
+            x[..., 2:4] = torch.exp(x[..., 2:4]) * self.anchor_grid  # wh
+            x[..., 4:] = x[..., 4:].sigmoid() #类别
+            x = x.view(bs, -1, self.num_attr)
+            #[bs,507,25] 3x13x13=507
+
         return x
-        # torch.Size([1, 3, 13, 13, 25])
-        # torch.Size([1, 3, 26, 26, 25])
-        # torch.Size([1, 3, 52, 52, 25])
+
+
+    @staticmethod
+    def _make_grid(nx=20, ny=20):
+        yv, xv = torch.meshgrid([torch.arange(ny), torch.arange(nx)])
+        return torch.stack((xv, yv), 2).view((1, 1, ny, nx, 2)).float()
 
 
 if __name__ == '__main__':
     x = torch.rand((1, 3, 416, 416))
-    #   13x13的特征层对应的anchor是[116,90],[156,198],[373,326]
-    #   26x26的特征层对应的anchor是[30,61],[62,45],[59,119]
-    #   52x52的特征层对应的anchor是[10,13],[16,30],[33,23]
-    anchors_mask1 = [[116, 90], [156, 198], [373, 326]]
-    anchors_mask2 = [[30, 61], [62, 45], [59, 119]]
-    anchors_mask3 = [[10, 13], [16, 30], [33, 23]]
-    anchors_mask_list = [anchors_mask1, anchors_mask2, anchors_mask3]
+
+    from config import anchors_mask_list
+
     num_classes = 20
 
-    model = YOLOV3(20, anchors_mask_list)
+    model = YOLOV3(20, anchors_mask_list,training=True)
+    out = model(x)
+    print(out)
 
-    #
-    final_out0, final_out1, final_out2 = model(x)
-    # (80+5)*3 = 255
-    print(final_out0.shape)  # torch.Size([1, 255, 13, 13])
-    print(final_out1.shape)  # torch.Size([1, 255, 26, 26])
-    print(final_out2.shape)  # torch.Size([1, 255, 52, 52])
+

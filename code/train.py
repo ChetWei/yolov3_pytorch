@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 import argparse
-
 import torch
-from utils.datasets import ListDataSet
-from torch.utils.data import DataLoader
-import torch.optim as optim
-from Yolo3Body import YOLOV3
-from utils.loss import compute_loss
-from utils.util import weights_init, get_lr,save_model
+
 from tqdm import tqdm
+import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
+from torch.utils.data import DataLoader
+
+from Yolo3Body import YOLOV3
+from config import anchors_mask_list
+from utils.datasets import ListDataSet
+from utils.loss import compute_loss
+from utils.util import weights_init, get_lr, save_model
+from utils.augmentations import AUGMENTATION_TRANSFORMS
 
 
 def create_dataloader(label_path, input_shape, batch_size, num_workers):
-    dataset = ListDataSet(labels_file=label_path, input_shape=input_shape)
-
+    dataset = ListDataSet(labels_file=label_path, input_shape=input_shape, transform=AUGMENTATION_TRANSFORMS)
     dataloader = DataLoader(
         dataset,
         batch_size=batch_size,
@@ -67,20 +69,40 @@ def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_
             pbar.update(1)
 
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
-def run():
-    parser = argparse.ArgumentParser(description="Trains the YOLO model.")
-    parser.add_argument('--cuda_id', type=int, default=1, help="使用的gpu")
-    parser.add_argument('--model_name', type=str, default="yolov3", help="保存模型名称")
-    parser.add_argument('--label_path', type=str, default="./voc2007_train.txt", help="设置label文件的路径")
-    parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description="Trains the YOLO3 model.")
+    parser.add_argument('--cuda_id', type=int, default=0, help="使用的gpu")
+    parser.add_argument('--pre_trained', type=str2bool, default=False, help="使用预训练模型")
+    parser.add_argument("--weight_path", type=str, default="../weights/yolov3_coco_20.pth", help="预训练权重路径")
+    parser.add_argument("--weight_dir", type=str, default="../weights", help="模型权重保存目录")
+    parser.add_argument('--model_name', type=str, default="yolov3_coco", help="保存模型名称")
+    parser.add_argument("--save_per_epoch", type=int, default=50, help="每多少轮保存一次权重")
+    parser.add_argument("--logdir", type=str, default="./logs_coco", help="tensorboard保存目录")
+    parser.add_argument('--label_path', type=str, default="../data/annotation/coco2017_train.txt", help="设置label文件的路径")
+    parser.add_argument("--num_classes", type=int, default=80, help="训练数据集的类别个数")
+
+    parser.add_argument('--freeze', type=str2bool, default=False, help="是否冻结骨干网络")
+
     parser.add_argument('--batch_size', type=int, default=16, help="batch的大小")
     parser.add_argument('--lr', type=float, default=0.0001, help="学习率")
+    parser.add_argument('--decay', type=float, default=0.0005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--epochs", type=int, default=1000, help="训练轮次")
-    parser.add_argument("--num_classes", type=int, default=20, help="训练数据集的类别个数")
-    parser.add_argument("--weight_dir", type=str, default="./weights", help="模型权重保存目录")
-    parser.add_argument("--logdir", type=str, default="./logs", help="tensorboard保存目录")
+    parser.add_argument("--epochs", type=int, default=100, help="训练轮次")
+    parser.add_argument('--num_workers', type=int, default=2, help="加载数据进程数量")
+
+    #========检测时候使用==========
     parser.add_argument("--iou_thres", type=float, default=0.5,
                         help="Evaluation: IOU threshold required to qualify as detected")
     parser.add_argument("--conf_thres", type=float, default=0.1, help="Evaluation: Object confidence threshold")
@@ -90,10 +112,6 @@ def run():
     args = parser.parse_args()
     print(f"Command line arguments: {args}")
 
-    anchors_mask1 = [[116, 90], [156, 198], [373, 326]]  # 对应 13x13
-    anchors_mask2 = [[30, 61], [62, 45], [59, 119]]  # 对应 26x26
-    anchors_mask3 = [[10, 13], [16, 30], [33, 23]]  # 对应 52x52
-    anchors_mask_list = [anchors_mask1, anchors_mask2, anchors_mask3]
     # tensorboard log
     writer = SummaryWriter(log_dir=args.logdir)
 
@@ -104,19 +122,24 @@ def run():
     # 加载模型
     model = YOLOV3(args.num_classes, anchors_mask_list, img_size=args.input_shape[0]).to(device)
     # 权重参数固定初始化
-    weights_init(model)
+    if args.pre_trained:
+        model.load_state_dict(torch.load(args.weight_path, map_location=device))
+    else:
+        weights_init(model)
+
+    # 是否冻结骨干网络
+    for param in model.backbone.parameters():
+        param.requires_grad = not args.freeze
+
     # 优化器
-    optimizer = optim.Adam(model.parameters(), lr=args.lr)
+    optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.decay)
 
     dataloader, epoch_steps = create_dataloader(args.label_path, args.input_shape, batch_size=args.batch_size,
                                                 num_workers=args.num_workers)
 
     for epoch in range(args.epochs):
-        train_one_epoch(model, dataloader, optimizer, device, epoch, args.epochs, epoch_steps/args.batch_size, writer)
+        train_one_epoch(model, dataloader, optimizer, device, epoch, args.epochs, epoch_steps // args.batch_size,
+                        writer)
 
-        if ((epoch + 1) % 100 == 0):
+        if ((epoch + 1) % args.save_per_epoch == 0):
             save_model(model, args.model_name, (epoch + 1), weights_dir=args.weight_dir)
-
-
-if __name__ == '__main__':
-    run()

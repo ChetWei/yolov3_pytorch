@@ -40,5 +40,8 @@ torch.Size([1, 75, 52, 52])
 
 ## 服务器运行
 ```shell
-nohup python  -u  train.py  > ./train.log 2>&1 &
+
+nohup python  -u  train.py  > ./train_voc.log 2>&1 &
+
+nohup python -u train.py --cuda_id=0 --batch_size=40 --lr=0.0001 --epochs=50 --freeze=False  > ./train_coco.log 2>&1 &
 ```

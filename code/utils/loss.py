@@ -26,7 +26,7 @@ def compute_loss(predictions, targets, model):
     BCEobj = nn.BCEWithLogitsLoss(
         pos_weight=torch.tensor([1.0], device=device))
 
-    # Calculate losses for each yolo layer
+    # 计算每个特征层的输出损失
     for layer_index, layer_predictions in enumerate(predictions):
         # Get image ids, anchors, grid index i and j for each target in the current yolo layer
         b, anchor, grid_j, grid_i = indices[layer_index]
