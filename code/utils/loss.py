@@ -17,7 +17,6 @@ def compute_loss(predictions, targets, model):
     # 存储损失
     lcls, lbox, lobj = torch.zeros(1, device=device), torch.zeros(1, device=device), torch.zeros(1, device=device)
     # 获得标签的 target
-    # Build yolo targets
     tcls, tbox, indices, anchors = build_targets(predictions, targets, model)  # targets
 
     # 这里的bce包含了 sigmoid + BCE 两个过程
@@ -28,15 +27,12 @@ def compute_loss(predictions, targets, model):
 
     # 计算每个特征层的输出损失
     for layer_index, layer_predictions in enumerate(predictions):
-        # Get image ids, anchors, grid index i and j for each target in the current yolo layer
+        # image ids, anchors, grid index i and j for each target in the current yolo layer
         b, anchor, grid_j, grid_i = indices[layer_index]
         # 创建有目标的标记初始为0 [1,3,13,13]
         tobj = torch.zeros_like(layer_predictions[..., 0], device=device)  # target obj
-        # Get the number of targets for this layer.
-        # Each target is a label box with some scaling and the association of an anchor box.
-        # Label boxes may be associated to 0 or multiple anchors. So they are multiple times or not at all in the targets.
         num_targets = b.shape[0]
-        # Check if there are targets for this batch
+        #是否目标
         if num_targets:
             # (num,85)
             ps = layer_predictions[b, anchor, grid_j, grid_i]
@@ -44,7 +40,6 @@ def compute_loss(predictions, targets, model):
             # 有目标存在的 box 回归
             # xy偏移 sigmoid 保持在(0,1)之间  shape(num,2)
             pxy = ps[:, :2].sigmoid()
-            # Apply exponent to wh predictions and multiply with the anchor box that matched best with the label for each cell that has a target
             # ahchors[layer_index] 之前gettarge得到的当前layer的先验框
             # 预测的比例 * 之前选中的负责预测的先验框尺寸 #shape（num,2）
             pwh = torch.exp(ps[:, 2:4]) * anchors[layer_index]
@@ -61,13 +56,11 @@ def compute_loss(predictions, targets, model):
             tobj[b, anchor, grid_j, grid_i] = iou.detach().clamp(0).type(
                 tobj.dtype)  # Use cells with iou > 0 as object targets
 
-            # Check if we need to do a classification (number of classes > 1)
-            if ps.size(1) - 5 > 1:  # 判断类别个数是否大于1
-                # Hot one class encoding 用 0 1 编码标记target
+            # 判断类别个数是否大于1,统计类别损失
+            if ps.size(1) - 5 > 1:
                 # (num,classnum)
-                t = torch.zeros_like(ps[:, 5:], device=device)  # targets
-                t[range(num_targets), tcls[layer_index]] = 1
-                # Use the tensor to calculate the BCE loss
+                t = torch.zeros_like(ps[:, 5:], device=device)
+                t[range(num_targets), tcls[layer_index]] = 1 #设置标签的类别为1 onehot
                 lcls += BCEcls(ps[:, 5:], t)  # BCE
 
         # 置信度损失，正负样本一起计算
