@@ -52,7 +52,6 @@ def compute_loss(predictions, targets, model):
             pbox = torch.cat((pxy, pwh), 1)
             # Calculate CIoU or GIoU for each target with the predicted box for its cell + anchor
             iou = bbox_iou(pbox.T, tbox[layer_index], x1y1x2y2=False, CIoU=True)
-            # We want to minimize our loss so we and the best possible IoU is 1 so we take 1 - IoU and reduce it with a mean
             # 得到的iou是一个 长度为 num 的tensor ，1-iou  再求平均
             lbox += (1.0 - iou).mean()  # iou loss
 
@@ -74,8 +73,8 @@ def compute_loss(predictions, targets, model):
         # 置信度损失，正负样本一起计算
         lobj += BCEobj(layer_predictions[..., 4], tobj)  # obj loss
 
-    lbox *= 0.05
-    lobj *= 1.0  # 是否有物体非常重要
+    lbox *= 1.0
+    lobj *= 5.0  # 是否有物体非常重要
     lcls *= 0.5
 
     # Merge losses

@@ -113,15 +113,15 @@ def run():
 
     parser = argparse.ArgumentParser(description="检测图片目标")
 
-    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/yolov3_coco_10.pth", help="权重文件")
+    parser.add_argument("-w", "--weight_path", type=str, default="../weights/yolov3_voc2007_200.pth", help="权重文件")
     parser.add_argument("-i", "--img_dir", type=str, default="../data/sample", help="待检测图片存放路径")
-    parser.add_argument("-c", "--classes", type=str, default="../config/coco_names.txt", help="类别文件")
+    parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")
     parser.add_argument("-o", "--output_path", type=str, default="../output", help="输出文件夹")
     parser.add_argument("-b", "--batch_size", type=int, default=1)
     parser.add_argument("--img_size", type=int, default=416, help="输入Yolo的图片尺度")
     parser.add_argument("--n_cpu", type=int, default=1, help="dataloader的线程")
     parser.add_argument("--conf_thres", type=float, default=0.1, help="有物体置信度阈值")
-    parser.add_argument("--nms_thres", type=float, default=0.2, help="NMS阈值")
+    parser.add_argument("--nms_thres", type=float, default=0.5, help="NMS阈值")
 
     args = parser.parse_args()
     print(f"Command line arguments: {args}")
