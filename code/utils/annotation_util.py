@@ -108,7 +108,6 @@ def convert_coco_annotation(label_file, img_home, save_path="../../data/annotati
 def run_voc_convert():
     # 配置远程服务器图片文件夹路径
     voc_img_home = "/root/autodl-tmp/VOC2007/JPEGImages"
-
     # 本地的路径
     voc_annotations_path = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/Annotations"
     segment_train_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/train.txt"
@@ -127,8 +126,8 @@ def run_coco_convert():
 
 
 if __name__ == '__main__':
-    #run_voc_convert()
+    run_voc_convert()
 
-    run_coco_convert()
+    #run_coco_convert()
 
     pass

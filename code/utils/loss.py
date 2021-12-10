@@ -66,8 +66,8 @@ def compute_loss(predictions, targets, model):
         # 置信度损失，正负样本一起计算
         lobj += BCEobj(layer_predictions[..., 4], tobj)  # obj loss
 
-    lbox *= 1.0
-    lobj *= 5.0  # 是否有物体非常重要
+    lbox *= 0.05
+    lobj *= 1.0  # 是否有物体非常重要
     lcls *= 0.5
 
     # Merge losses

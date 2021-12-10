@@ -87,11 +87,11 @@ if __name__ == '__main__':
     parser.add_argument('--pre_trained', type=str2bool, default=False, help="使用预训练模型")
     parser.add_argument("--weight_path", type=str, default="../weights/yolov3_coco_20.pth", help="预训练权重路径")
     parser.add_argument("--weight_dir", type=str, default="../weights", help="模型权重保存目录")
-    parser.add_argument('--model_name', type=str, default="yolov3_coco", help="保存模型名称")
-    parser.add_argument("--save_per_epoch", type=int, default=50, help="每多少轮保存一次权重")
-    parser.add_argument("--logdir", type=str, default="./logs_coco", help="tensorboard保存目录")
-    parser.add_argument('--label_path', type=str, default="../data/annotation/coco2017_train.txt", help="设置label文件的路径")
-    parser.add_argument("--num_classes", type=int, default=80, help="训练数据集的类别个数")
+    parser.add_argument('--model_name', type=str, default="yolov3_voc", help="保存模型名称")
+    parser.add_argument("--save_per_epoch", type=int, default=100, help="每多少轮保存一次权重")
+    parser.add_argument("--logdir", type=str, default="./logs_voc", help="tensorboard保存目录")
+    parser.add_argument('--label_path', type=str, default="../data/annotation/voc2007_train.txt", help="设置label文件的路径")
+    parser.add_argument("--num_classes", type=int, default=20, help="训练数据集的类别个数")
 
     parser.add_argument('--freeze', type=str2bool, default=False, help="是否冻结骨干网络")
 
@@ -99,8 +99,8 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.0001, help="学习率")
     parser.add_argument('--decay', type=float, default=0.0005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--epochs", type=int, default=100, help="训练轮次")
-    parser.add_argument('--num_workers', type=int, default=2, help="加载数据进程数量")
+    parser.add_argument("--epochs", type=int, default=1000, help="训练轮次")
+    parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
 
     #========检测时候使用==========
     parser.add_argument("--iou_thres", type=float, default=0.5,
