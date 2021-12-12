@@ -36,24 +36,34 @@ class ImgAug(object):
 
         # 数据增强之后获取更正后的目标框位置
         bounding_boxes = bounding_boxes.clip_out_of_image()
-
         # 转换为numpy
         boxes = np.zeros((len(bounding_boxes), 5))
         for box_idx, box in enumerate(bounding_boxes):
-            # Extract coordinates for unpadded + unscaled image
-            x1 = box.x1
-            y1 = box.y1
-            x2 = box.x2
-            y2 = box.y2
-            # xyxy to xywh
+            # xyxy
             boxes[box_idx, 0] = box.label
-            boxes[box_idx, 1] = ((x1 + x2) / 2)
-            boxes[box_idx, 2] = ((y1 + y2) / 2)
-            boxes[box_idx, 3] = (x2 - x1)
-            boxes[box_idx, 4] = (y2 - y1)
+            boxes[box_idx, 1] = box.x1
+            boxes[box_idx, 2] = box.y1
+            boxes[box_idx, 3] = box.x2
+            boxes[box_idx, 4] = box.y2
 
-        # 返回 (x, y, w, h)
+        # 返回 (x1, y1, x2, y2)
         return img, boxes
+
+
+# 坐标转换
+# bounding_boxes = bounding_boxes.clip_out_of_image() 传入的bbox
+class CoordinateTransform(object):
+    def __init__(self, xyxy2xywh=True):
+        self.xyxy2xywh = xyxy2xywh
+        pass
+
+    def __call__(self, data):
+        img, bboxes = data
+        if self.xyxy2xywh:
+            bboxes[:, 3:5] = bboxes[:, 3:5] - bboxes[:, 1:3]  # w,h
+            bboxes[:, 1:3] = bboxes[:, 1:3] + bboxes[:, 3:5] / 2  # x,y
+
+        return img, bboxes
 
 
 # 根据宽高获得归一化的坐标
@@ -117,7 +127,8 @@ class Resize(object):
         img = F.interpolate(img.unsqueeze(0), size=self.size, mode="nearest").squeeze(0)
         return img, boxes
 
-#检测的时候使用
+
+# 检测的时候使用
 DEFAULT_TRANSFORMS = transforms.Compose([
     # AbsoluteLabels(),
     PadSquare(),
@@ -125,23 +136,22 @@ DEFAULT_TRANSFORMS = transforms.Compose([
     ToTensor(),
 ])
 
-
 if __name__ == '__main__':
-    from PIL import Image,ImageDraw
+    from PIL import Image, ImageDraw
     import numpy as np
 
     pil_img = Image.open("/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000030.jpg")
     np_img = np.array(pil_img)
     # x1y1x2y2
-    a = [[14,36,205,180,289],[10,51,160,150,292],[10,295,138,450,290]]
+    a = [[14, 36, 205, 180, 289], [10, 51, 160, 150, 292], [10, 295, 138, 450, 290]]
     bbox = np.array(a)
 
-    img, bb_targets = DEFAULT_TRANSFORMS((np_img,bbox))
+    img, bb_targets = DEFAULT_TRANSFORMS((np_img, bbox))
 
     pil_img = Image.fromarray(img)
     draw = ImageDraw.Draw(pil_img)
     for box in bb_targets.tolist():
-        cls_idx,xc, yc, w, h = box
+        cls_idx, xc, yc, w, h = box
         x1, y1 = xc - w / 2.0, yc - h / 2.0
         x2, y2 = xc + w / 2.0, yc + h / 2.0
 

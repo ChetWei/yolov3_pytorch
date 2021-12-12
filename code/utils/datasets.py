@@ -59,11 +59,12 @@ class ListDataSet(Dataset):
     def __len__(self):
         return len(self.lines)
 
+
     def collate_fn(self, batch):
         imgs, bb_targets = list(zip(*batch))
         # 将pad正方形图片resize成模型输入的大小   拼接batchsize
         imgs = torch.stack([resize(img, self.input_shape[0]) for img in imgs])
-
+        #设置属于一个batchsize中的第几个数据
         for i, boxes in enumerate(bb_targets):
             boxes[:, 0] = i
         # 将这个batch的多个数据，整合在一起 （nums,6）,因为数据里面设置了对应的batchid 所以后面可以找到属于哪个batch

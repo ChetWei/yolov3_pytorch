@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import imgaug.augmenters as iaa
 from torchvision import transforms
-from .transforms import ToTensor, PadSquare, RelativeLabels, AbsoluteLabels, ImgAug
+from transforms import ToTensor, PadSquare, RelativeLabels, AbsoluteLabels,CoordinateTransform, ImgAug
 
 class DefaultAug(ImgAug):
     def __init__(self, ):
@@ -32,6 +32,31 @@ AUGMENTATION_TRANSFORMS = transforms.Compose([
     #AbsoluteLabels(), #目标检测框坐标 从归一化数据转为绝对数据
     DefaultAug(), #默认的数据增强
     PadSquare(), #padding图像为正方形
+    CoordinateTransform(), #转换 xyxy2xywh
     RelativeLabels(),  #根据宽高获得归一化后的坐标
     ToTensor(), #转为tensor数据
 ])
+
+
+if __name__ == '__main__':
+    from PIL import Image,ImageDraw
+    import numpy as np
+
+    pil_img = Image.open("/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000030.jpg")
+    np_img = np.array(pil_img)
+    # x1y1x2y2
+    a = [[14,36,205,180,289],[10,51,160,150,292],[10,295,138,450,290]]
+    bbox = np.array(a)
+
+    img, bb_targets = AUGMENTATION_TRANSFORMS((np_img,bbox))
+
+    pil_img = Image.fromarray(img)
+    draw = ImageDraw.Draw(pil_img)
+    for box in bb_targets.tolist():
+        cls_idx,xc, yc, w, h = box
+        x1, y1 = xc - w / 2.0, yc - h / 2.0
+        x2, y2 = xc + w / 2.0, yc + h / 2.0
+
+        draw.rectangle((x1, y1, x2, y2), outline=(102, 255, 102), width=2)
+
+    pil_img.show()

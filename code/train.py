@@ -85,7 +85,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Trains the YOLO3 model.")
     parser.add_argument('--cuda_id', type=int, default=0, help="使用的gpu")
     parser.add_argument('--pre_trained', type=str2bool, default=False, help="使用预训练模型")
-    parser.add_argument("--weight_path", type=str, default="../weights/yolov3_coco_20.pth", help="预训练权重路径")
+    parser.add_argument("--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_500.pth", help="预训练权重路径")
     parser.add_argument("--weight_dir", type=str, default="../weights", help="模型权重保存目录")
     parser.add_argument('--model_name', type=str, default="yolov3_voc", help="保存模型名称")
     parser.add_argument("--save_per_epoch", type=int, default=100, help="每多少轮保存一次权重")
