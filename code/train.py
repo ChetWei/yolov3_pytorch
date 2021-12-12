@@ -100,7 +100,7 @@ if __name__ == '__main__':
     parser.add_argument('--decay', type=float, default=0.0005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
     parser.add_argument("--epochs", type=int, default=1000, help="训练轮次")
-    parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
+    parser.add_argument('--num_workers', type=int, default=2, help="加载数据进程数量")
 
     #========检测时候使用==========
     parser.add_argument("--iou_thres", type=float, default=0.5,
