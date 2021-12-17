@@ -5,17 +5,19 @@ import tqdm
 import random
 import numpy as np
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 import torch
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 
-from utils.util import get_classes_name, non_max_suppression, rescale_boxes
+from utils.util import get_classes_name, non_max_suppression, rescale_boxes,Colors
 from utils.datasets import ImageFolder
 from utils.transforms import Resize, DEFAULT_TRANSFORMS
 from Yolo3Body import YOLOV3
+
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -47,7 +49,7 @@ def detect(model, dataloader, output_path, img_size, conf_thres, nms_thres):
     :return:
     """
     os.makedirs(output_path, exist_ok=True)
-    model.eval() #设置模型为评估
+    model.eval()  # 设置模型为评估
 
     Tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor
 
@@ -55,13 +57,13 @@ def detect(model, dataloader, output_path, img_size, conf_thres, nms_thres):
     imgs = []  # 存储图片路径
 
     for (img_paths, input_imgs) in tqdm.tqdm(dataloader, desc="Detecting"):
-        #dataloader 加载 img_path:检测图片的路径, input_img:待检测的tensor图片数据
+        # dataloader 加载 img_path:检测图片的路径, input_img:待检测的tensor图片数据
         input_imgs = Variable(input_imgs.type(Tensor))
         # 预测
         with torch.no_grad():
-            #(batch_size,num,25)
+            # (batch_size,num,25)
             detections = model(input_imgs)
-            #Non-Maximum Suppression 非极大抑制
+            # Non-Maximum Suppression 非极大抑制
             detections = non_max_suppression(detections, conf_thres, nms_thres)
 
         # Store image and detections
@@ -78,58 +80,55 @@ def _draw_and_save_output_images(img_detections, imgs, img_size, output_path, cl
             image_path, detections, img_size, output_path, classes)
 
 
+
+def check_font(font='../config/Arial.ttf', size=10):
+    font = Path(font)
+    return ImageFont.truetype(str(font) if font.exists() else font.name, size)
+
+colors = Colors()
 def _draw_and_save_output_image(image_path, detections, img_size, output_path, classes):
-    img = np.array(Image.open(image_path)) #打开原图像
-    plt.figure()
-    fig, ax = plt.subplots(1)
-    ax.imshow(img)
+    pil_img = Image.open(image_path)
+    np_img = np.array(pil_img)
+    default_fontsize = max(round(sum(pil_img.size) / 2 * 0.035), 12)
+    font = check_font(size=default_fontsize)
+    line_width = max(round(sum(np_img.shape) / 2 * 0.003), 2)  # 目标框的线条宽度
+    draw = ImageDraw.Draw(pil_img)
+    txt_color = (255, 255, 255)
+    img = np.array(Image.open(image_path))  # 打开原图像
     # Rescale boxes to original image
     detections = rescale_boxes(detections, img_size, img.shape[:2])
-    unique_labels = detections[:, -1].cpu().unique()
-    n_cls_preds = len(unique_labels)
 
-    # Bounding-box colors
-    #cmap = plt.get_cmap("tab20")
-    cmap = plt.get_cmap('tab20',20)
-    #colors = [cmap(i) for i in np.linspace(0, 1, 80)]
-    #bbox_colors = random.sample(colors, n_cls_preds)
     for x1, y1, x2, y2, conf, cls_pred in detections:
-        print(cls_pred)
         print(f"\t+ Label: {classes[int(cls_pred)]} | Confidence: {conf.item():0.4f}")
+        color = colors(int(cls_pred))
+        # 1.先画目标检测框
+        #x1, y1, x2, y2 = x1.detach().numpy().tolist(), y1.detach().numpy().tolist(), x2.detach().numpy().tolist(), y2.detach().numpy().tolist()
+        draw.rectangle([x1, y1, x2, y2], width=line_width, outline=color)
+        # 2.画左上角标签 包括框框和text
+        # 获取标签字体的的宽度
+        class_name = classes[int(cls_pred)]
+        w, h = font.getsize(class_name)
+        not_outside = y1 - h >= 0  # 判断label是否超出了图片范围
+        # 2.1先画label的框框
+        draw.rectangle([x1,
+                        y1 - h if not_outside else y1,
+                        x1 + w + 1,
+                        y1 + 1 if not_outside else y1 + h + 1], fill=color)
+        # 2.2画label的字体
+        draw.text([x1,
+                   y1 - h if not_outside else y1], class_name, fill=txt_color, font=font)
 
-        box_w = x2 - x1
-        box_h = y2 - y1
-
-        color = cmap(int(cls_pred))
-        # edgecolor边框颜色 facecolor=none 不填充
-        bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2, edgecolor=color, facecolor="none")
-        # Add the bbox to the plot
-        ax.add_patch(bbox)
-        # Add label
-        plt.text(
-            x1, y1,
-            s=classes[int(cls_pred)],
-            color="white",
-            verticalalignment="top",
-            bbox={"color": color, "pad": 0})
-
-    # Save generated image with detections
-    plt.axis("off")
-    plt.gca().xaxis.set_major_locator(NullLocator())
-    plt.gca().yaxis.set_major_locator(NullLocator())
     filename = os.path.basename(image_path).split(".")[0]
     output_path = os.path.join(output_path, f"{filename}.png")
-    #保存图片 bbox_inches="tight" figure自适应图片尺寸 pad_inches去掉空白
-    plt.savefig(output_path, bbox_inches="tight", pad_inches=0.0)
-    plt.close()
-
+    # 保存图片 bbox_inches="tight" figure自适应图片尺寸 pad_inches去掉空白
+    pil_img.save(output_path)
 
 def run():
     from config import anchors_mask_list
 
     parser = argparse.ArgumentParser(description="检测图片目标")
 
-    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_vocc_50 (1).pth",
+    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_vocc_100.pth",
                         help="权重文件")
     parser.add_argument("-i", "--img_dir", type=str, default="../data/sample", help="待检测图片存放路径")
     parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")

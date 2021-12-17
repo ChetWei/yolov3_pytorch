@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import imgaug.augmenters as iaa
 from torchvision import transforms
-from transforms import ToTensor, PadSquare, RelativeLabels, AbsoluteLabels,CoordinateTransform, ImgAug
+from .transforms import ToTensor, PadSquare, RelativeLabels, AbsoluteLabels,CoordinateTransform, ImgAug
 
 class DefaultAug(ImgAug):
     def __init__(self, ):
