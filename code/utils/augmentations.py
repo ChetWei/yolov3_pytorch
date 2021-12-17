@@ -38,6 +38,17 @@ AUGMENTATION_TRANSFORMS = transforms.Compose([
 ])
 
 
+#训练的时候使用
+TEST_TRANSFORMS = transforms.Compose([
+    #AbsoluteLabels(), #目标检测框坐标 从归一化数据转为绝对数据
+    # DefaultAug(), #默认的数据增强
+    StrongAug(),
+    PadSquare(), #padding图像为正方形
+    CoordinateTransform(), #转换 xyxy2xywh
+    RelativeLabels(),  #根据宽高获得归一化后的坐标
+
+])
+
 if __name__ == '__main__':
     from PIL import Image,ImageDraw
     import numpy as np
@@ -48,7 +59,7 @@ if __name__ == '__main__':
     a = [[14,36,205,180,289],[10,51,160,150,292],[10,295,138,450,290]]
     bbox = np.array(a)
 
-    img, bb_targets = AUGMENTATION_TRANSFORMS((np_img,bbox))
+    img, bb_targets = TEST_TRANSFORMS((np_img,bbox))
 
     pil_img = Image.fromarray(img)
     draw = ImageDraw.Draw(pil_img)

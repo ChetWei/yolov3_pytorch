@@ -21,7 +21,7 @@ class ImageFolder(Dataset):
             Image.open(img_path).convert('RGB'),
             dtype=np.uint8)
 
-        # Label Placeholder
+        # Label Placeholder  填充类别
         boxes = np.zeros((1, 5))
 
         # Apply transforms

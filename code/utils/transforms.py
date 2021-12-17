@@ -128,10 +128,11 @@ class Resize(object):
         return img, boxes
 
 
-# 检测的时候使用
+# 检测的时候使用，没有使用数据增强
 DEFAULT_TRANSFORMS = transforms.Compose([
     # AbsoluteLabels(),
     PadSquare(),
+    CoordinateTransform(), #坐标转换
     RelativeLabels(),
     ToTensor(),
 ])

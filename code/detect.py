@@ -36,20 +36,32 @@ def _create_data_loader(img_path, batch_size, img_size, n_cpu):
 
 
 def detect(model, dataloader, output_path, img_size, conf_thres, nms_thres):
+    """
+
+    :param model: 训练好的模型
+    :param dataloader: 数据加载器
+    :param output_path: 图片保存目录
+    :param img_size:
+    :param conf_thres:
+    :param nms_thres:
+    :return:
+    """
     os.makedirs(output_path, exist_ok=True)
-    model.eval()
+    model.eval() #设置模型为评估
+
     Tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor
 
     img_detections = []  # Stores detections for each image index
-    imgs = []  # Stores image paths
+    imgs = []  # 存储图片路径
 
     for (img_paths, input_imgs) in tqdm.tqdm(dataloader, desc="Detecting"):
-        # Configure input
+        #dataloader 加载 img_path:检测图片的路径, input_img:待检测的tensor图片数据
         input_imgs = Variable(input_imgs.type(Tensor))
-
         # 预测
         with torch.no_grad():
+            #(batch_size,num,25)
             detections = model(input_imgs)
+            #Non-Maximum Suppression 非极大抑制
             detections = non_max_suppression(detections, conf_thres, nms_thres)
 
         # Store image and detections
@@ -67,7 +79,7 @@ def _draw_and_save_output_images(img_detections, imgs, img_size, output_path, cl
 
 
 def _draw_and_save_output_image(image_path, detections, img_size, output_path, classes):
-    img = np.array(Image.open(image_path))
+    img = np.array(Image.open(image_path)) #打开原图像
     plt.figure()
     fig, ax = plt.subplots(1)
     ax.imshow(img)
@@ -75,24 +87,27 @@ def _draw_and_save_output_image(image_path, detections, img_size, output_path, c
     detections = rescale_boxes(detections, img_size, img.shape[:2])
     unique_labels = detections[:, -1].cpu().unique()
     n_cls_preds = len(unique_labels)
+
     # Bounding-box colors
-    cmap = plt.get_cmap("tab20b")
-    colors = [cmap(i) for i in np.linspace(0, 1, n_cls_preds)]
-    bbox_colors = random.sample(colors, n_cls_preds)
+    #cmap = plt.get_cmap("tab20")
+    cmap = plt.get_cmap('tab20',20)
+    #colors = [cmap(i) for i in np.linspace(0, 1, 80)]
+    #bbox_colors = random.sample(colors, n_cls_preds)
     for x1, y1, x2, y2, conf, cls_pred in detections:
+        print(cls_pred)
         print(f"\t+ Label: {classes[int(cls_pred)]} | Confidence: {conf.item():0.4f}")
 
         box_w = x2 - x1
         box_h = y2 - y1
 
-        color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
-        # Create a Rectangle patch
+        color = cmap(int(cls_pred))
+        # edgecolor边框颜色 facecolor=none 不填充
         bbox = patches.Rectangle((x1, y1), box_w, box_h, linewidth=2, edgecolor=color, facecolor="none")
         # Add the bbox to the plot
         ax.add_patch(bbox)
         # Add label
         plt.text(
-            x1,y1,
+            x1, y1,
             s=classes[int(cls_pred)],
             color="white",
             verticalalignment="top",
@@ -104,6 +119,7 @@ def _draw_and_save_output_image(image_path, detections, img_size, output_path, c
     plt.gca().yaxis.set_major_locator(NullLocator())
     filename = os.path.basename(image_path).split(".")[0]
     output_path = os.path.join(output_path, f"{filename}.png")
+    #保存图片 bbox_inches="tight" figure自适应图片尺寸 pad_inches去掉空白
     plt.savefig(output_path, bbox_inches="tight", pad_inches=0.0)
     plt.close()
 
@@ -113,15 +129,16 @@ def run():
 
     parser = argparse.ArgumentParser(description="检测图片目标")
 
-    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_300.pth", help="权重文件")
+    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_vocc_50 (1).pth",
+                        help="权重文件")
     parser.add_argument("-i", "--img_dir", type=str, default="../data/sample", help="待检测图片存放路径")
     parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")
     parser.add_argument("-o", "--output_path", type=str, default="../output", help="输出文件夹")
     parser.add_argument("-b", "--batch_size", type=int, default=1)
     parser.add_argument("--img_size", type=int, default=416, help="输入Yolo的图片尺度")
     parser.add_argument("--n_cpu", type=int, default=1, help="dataloader的线程")
-    parser.add_argument("--conf_thres", type=float, default=0.1, help="有物体置信度阈值")
-    parser.add_argument("--nms_thres", type=float, default=0.5, help="NMS阈值")
+    parser.add_argument("--conf_thres", type=float, default=0.2, help="有物体置信度阈值")
+    parser.add_argument("--nms_thres", type=float, default=0.4, help="NMS阈值")
 
     args = parser.parse_args()
     print(f"Command line arguments: {args}")
@@ -132,10 +149,11 @@ def run():
     # 加载模型
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    # 设置非训练模型加载
     model = YOLOV3(cls_num=len(classes), anchors=anchors_mask_list, img_size=args.img_size, training=False).to(device)
-
+    # 加载模型参数
     model.load_state_dict(torch.load(args.weight_path, map_location=device))
-
+    # 创建dataloader
     dataloader = _create_data_loader(args.img_dir, args.batch_size, args.img_size, args.n_cpu)
 
     # 检测图片
@@ -143,6 +161,7 @@ def run():
 
     # 画图并输出图片
     _draw_and_save_output_images(img_detections, imgs, args.img_size, args.output_path, classes)
+
 
 if __name__ == '__main__':
     run()
