@@ -113,9 +113,25 @@ class ToTensor(object):
         img = transforms.ToTensor()(img)
         # 在bbox上增加一个值，用来表示当前数据属于当前batch的第几个，存batch_id
         bb_targets = torch.zeros((len(boxes), 6))
-        bb_targets[:, 1:] = transforms.ToTensor()(boxes)
+        bb_targets[:, 1:] = transforms.ToTensor()(boxes)  # 自动归一化为tensor 0-1
 
         return img, bb_targets
+
+
+# 标准化
+class Normalize(object):
+    def __init__(self, mean=[.5, .5, .5], std=[.5, .5, .5], inplace=False):
+        """
+        :param mean: 各个通道的均值
+        :param std: 各个通道的标准差
+        :param inplace: 是否原地操作
+        """
+        self.t = transforms.Normalize(mean,std,inplace)
+
+    def __call__(self, data):
+        tensor_img, boxes = data
+        tensor_img = self.t(tensor_img)
+        return tensor_img, boxes
 
 
 class Resize(object):
@@ -132,9 +148,10 @@ class Resize(object):
 DEFAULT_TRANSFORMS = transforms.Compose([
     # AbsoluteLabels(),
     PadSquare(),
-    CoordinateTransform(), #坐标转换
+    CoordinateTransform(),  # 坐标转换
     RelativeLabels(),
     ToTensor(),
+    Normalize()
 ])
 
 if __name__ == '__main__':

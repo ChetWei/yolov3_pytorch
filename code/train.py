@@ -90,17 +90,17 @@ if __name__ == '__main__':
     parser.add_argument('--model_name', type=str, default="yolov3_voc", help="保存模型名称")
     parser.add_argument("--save_per_epoch", type=int, default=100, help="每多少轮保存一次权重")
     parser.add_argument("--logdir", type=str, default="./logs_voc", help="tensorboard保存目录")
-    parser.add_argument('--label_path', type=str, default="../data/annotation/voc2007_train.txt", help="设置label文件的路径")
+    parser.add_argument('--label_path', type=str, default="../data/annotation/voc2007_train_local.txt", help="设置label文件的路径")
     parser.add_argument("--num_classes", type=int, default=20, help="训练数据集的类别个数")
 
     parser.add_argument('--freeze', type=str2bool, default=False, help="是否冻结骨干网络")
 
     parser.add_argument('--cosine_lr', type=str2bool, default=True, help="使用余弦退火学习策略")
-    parser.add_argument('--batch_size', type=int, default=16, help="batch的大小")
-    parser.add_argument('--lr', type=float, default=0.0001, help="学习率")
-    parser.add_argument('--decay', type=float, default=0.0005, help="decay")
+    parser.add_argument('--batch_size', type=int, default=4, help="batch的大小")
+    parser.add_argument('--lr', type=float, default=0.00001, help="学习率")
+    parser.add_argument('--decay', type=float, default=0.00005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--epochs", type=int, default=1000, help="训练轮次")
+    parser.add_argument("--epochs", type=int, default=500, help="训练轮次")
     parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
 
     #========检测时候使用==========

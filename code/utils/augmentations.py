@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import imgaug.augmenters as iaa
+
+from .transforms import ToTensor, PadSquare, RelativeLabels, AbsoluteLabels,CoordinateTransform, ImgAug,Normalize
 from torchvision import transforms
-from .transforms import ToTensor, PadSquare, RelativeLabels, AbsoluteLabels,CoordinateTransform, ImgAug
 
 class DefaultAug(ImgAug):
     def __init__(self, ):
@@ -34,7 +35,8 @@ AUGMENTATION_TRANSFORMS = transforms.Compose([
     PadSquare(), #padding图像为正方形
     CoordinateTransform(), #转换 xyxy2xywh
     RelativeLabels(),  #根据宽高获得归一化后的坐标
-    ToTensor(), #转为tensor数据
+    ToTensor(), #转为tensor数据，自动归一化
+    Normalize() #标准化 均值方差
 ])
 
 

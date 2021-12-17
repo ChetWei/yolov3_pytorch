@@ -212,13 +212,12 @@ class YoloOutLayer(nn.Module):
 
 
 if __name__ == '__main__':
-    x = torch.rand((1, 3, 416, 416))
+    x = torch.rand((1, 3, 640, 640))
 
     from config import anchors_mask_list
-
     num_classes = 20
 
-    model = YOLOV3(20, anchors_mask_list,training=True)
+    model = YOLOV3(20, anchors_mask_list,img_size=640,training=True)
     out = model(x)
     print(out)
 

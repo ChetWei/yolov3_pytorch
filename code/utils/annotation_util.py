@@ -13,7 +13,7 @@ from util import get_classes_name
 
 def convert_voc_annotaion(voc_annotations_path, voc_img_home, segment_file,
                           classname_file="../../config/voc_names.txt",
-                          target_file="../../data/annotation/voc2007_test.txt"):
+                          target_file="../../data/annotation/voc2007_train_local.txt"):
     class_names = get_classes_name(classname_file)
     with open(segment_file, 'r') as f:
         file_ids = [line.strip() for line in f.readlines()]
@@ -107,15 +107,15 @@ def convert_coco_annotation(label_file, img_home, save_path="../../data/annotati
 # 读取本地的标签文件转换为自己的标签格式
 def run_voc_convert():
     # 配置远程服务器图片文件夹路径
-    # voc_img_home = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages"
-    voc_img_home = "/root/autodl-tmp/VOC2007/JPEGImages"
+    voc_img_home = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages"
+    #voc_img_home = "/root/autodl-tmp/VOC2007/JPEGImages"
     # 本地的路径
     voc_annotations_path = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/Annotations"
-    segment_train_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/train.txt"
-    segment_val_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/val.txt"
-    segment_test_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/test.txt"
+    segment_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/train.txt"
+    #segment_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/val.txt"
+    #segment_file = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/test.txt"
 
-    convert_voc_annotaion(voc_annotations_path, voc_img_home, segment_test_file)
+    convert_voc_annotaion(voc_annotations_path, voc_img_home, segment_file)
 
 
 def run_coco_convert():

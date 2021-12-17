@@ -115,7 +115,8 @@ class DarkNet(nn.Module):
         out3 = self.layer3(x)
         out4 = self.layer4(out3)
         out5 = self.layer5(out4)
-
+        # 尺寸 out3 > out4 > out5
+        # inputsize/8   inputsize/16 inputsize/32
         return out3, out4, out5
 
 
