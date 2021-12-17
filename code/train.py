@@ -95,12 +95,13 @@ if __name__ == '__main__':
 
     parser.add_argument('--freeze', type=str2bool, default=False, help="是否冻结骨干网络")
 
+    parser.add_argument('--cosine_lr', type=str2bool, default=True, help="使用余弦退火学习策略")
     parser.add_argument('--batch_size', type=int, default=16, help="batch的大小")
     parser.add_argument('--lr', type=float, default=0.0001, help="学习率")
     parser.add_argument('--decay', type=float, default=0.0005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
     parser.add_argument("--epochs", type=int, default=1000, help="训练轮次")
-    parser.add_argument('--num_workers', type=int, default=2, help="加载数据进程数量")
+    parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
 
     #========检测时候使用==========
     parser.add_argument("--iou_thres", type=float, default=0.5,
@@ -133,6 +134,11 @@ if __name__ == '__main__':
 
     # 优化器
     optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.decay)
+    if args.cosine_lr:
+        # 余弦退🔥
+        lr_scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5, eta_min=1e-5)
+    else:
+        lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.94)
 
     dataloader, epoch_steps = create_dataloader(args.label_path, args.input_shape, batch_size=args.batch_size,
                                                 num_workers=args.num_workers)
@@ -140,6 +146,7 @@ if __name__ == '__main__':
     for epoch in range(args.epochs):
         train_one_epoch(model, dataloader, optimizer, device, epoch, args.epochs, epoch_steps // args.batch_size,
                         writer)
+        lr_scheduler.step()
 
         if ((epoch + 1) % args.save_per_epoch == 0):
             save_model(model, args.model_name, (epoch + 1), weights_dir=args.weight_dir)
