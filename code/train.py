@@ -102,7 +102,7 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=4, help="batch的大小")
     parser.add_argument('--lr', type=float, default=0.00001, help="学习率")
     parser.add_argument('--momentum', type=float, default=0.999, help="学习率")
-    parser.add_argument('--decay', type=float, default=0.00005, help="decay")
+    parser.add_argument('--decay', type=float, default=0.0005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
     parser.add_argument("--epochs", type=int, default=500, help="训练轮次")
     parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
