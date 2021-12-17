@@ -85,25 +85,29 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Trains the YOLO3 model.")
     parser.add_argument('--cuda_id', type=int, default=0, help="使用的gpu")
     parser.add_argument('--pre_trained', type=str2bool, default=False, help="使用预训练模型")
-    parser.add_argument("--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_500.pth", help="预训练权重路径")
+    parser.add_argument("--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_500.pth",
+                        help="预训练权重路径")
     parser.add_argument("--weight_dir", type=str, default="../weights", help="模型权重保存目录")
     parser.add_argument('--model_name', type=str, default="yolov3_voc", help="保存模型名称")
     parser.add_argument("--save_per_epoch", type=int, default=100, help="每多少轮保存一次权重")
     parser.add_argument("--logdir", type=str, default="./logs_voc", help="tensorboard保存目录")
-    parser.add_argument('--label_path', type=str, default="../data/annotation/voc2007_train_local.txt", help="设置label文件的路径")
+    parser.add_argument('--label_path', type=str, default="../data/annotation/voc2007_train_local.txt",
+                        help="设置label文件的路径")
     parser.add_argument("--num_classes", type=int, default=20, help="训练数据集的类别个数")
 
     parser.add_argument('--freeze', type=str2bool, default=False, help="是否冻结骨干网络")
 
+    parser.add_argument('--adam', type=str2bool, default=False, help="使用Adam or SGD")
     parser.add_argument('--cosine_lr', type=str2bool, default=True, help="使用余弦退火学习策略")
     parser.add_argument('--batch_size', type=int, default=4, help="batch的大小")
     parser.add_argument('--lr', type=float, default=0.00001, help="学习率")
+    parser.add_argument('--momentum', type=float, default=0.999, help="学习率")
     parser.add_argument('--decay', type=float, default=0.00005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
     parser.add_argument("--epochs", type=int, default=500, help="训练轮次")
     parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
 
-    #========检测时候使用==========
+    # ========检测时候使用==========
     parser.add_argument("--iou_thres", type=float, default=0.5,
                         help="Evaluation: IOU threshold required to qualify as detected")
     parser.add_argument("--conf_thres", type=float, default=0.1, help="Evaluation: Object confidence threshold")
@@ -133,7 +137,12 @@ if __name__ == '__main__':
         param.requires_grad = not args.freeze
 
     # 优化器
-    optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.decay)
+    if args.adam:
+        optimizer = optim.Adam(model.parameters(), betas=(args.momentum, 0.999), weight_decay=args.decay)
+    else:
+        optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.decay,
+                              nesterov=True)
+
     if args.cosine_lr:
         # 余弦退🔥
         lr_scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5, eta_min=1e-5)
