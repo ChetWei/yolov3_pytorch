@@ -127,7 +127,7 @@ def run():
 
     parser = argparse.ArgumentParser(description="检测图片目标")
 
-    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_200.pth",
+    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_240.pth",
                         help="权重文件")
     parser.add_argument("-i", "--img_dir", type=str, default="../data/sample", help="待检测图片存放路径")
     parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")

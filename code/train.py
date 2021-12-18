@@ -138,14 +138,14 @@ if __name__ == '__main__':
 
     # 优化器
     if args.adam:
-        optimizer = optim.Adam(model.parameters(), betas=(args.momentum, 0.999), weight_decay=args.decay)
+        optimizer = optim.Adam(model.parameters(),lr=args.lr, betas=(args.momentum, 0.999), weight_decay=args.decay)
     else:
         optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.decay,
                               nesterov=True)
 
     if args.cosine_lr:
         # 余弦退🔥
-        lr_scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5, eta_min=1e-5)
+        lr_scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=1e-5)
     else:
         lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.94)
 

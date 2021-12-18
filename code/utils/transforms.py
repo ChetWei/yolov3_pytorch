@@ -151,7 +151,7 @@ DEFAULT_TRANSFORMS = transforms.Compose([
     CoordinateTransform(),  # 坐标转换
     RelativeLabels(), # 根据宽高获得归一化的坐标
     ToTensor(), #转为tensor数据，并且归一化
-    Normalize() #如果训练使用了标准化，那么测试的时候也应该进行标准化
+    #Normalize() #如果训练使用了标准化，那么测试的时候也应该进行标准化
 ])
 
 if __name__ == '__main__':
