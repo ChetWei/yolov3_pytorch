@@ -97,14 +97,14 @@ if __name__ == '__main__':
 
     parser.add_argument('--freeze', type=str2bool, default=False, help="是否冻结骨干网络")
 
-    parser.add_argument('--adam', type=str2bool, default=False, help="使用Adam or SGD")
+    parser.add_argument('--adam', type=str2bool, default=True, help="使用Adam or SGD")
     parser.add_argument('--cosine_lr', type=str2bool, default=True, help="使用余弦退火学习策略")
     parser.add_argument('--batch_size', type=int, default=4, help="batch的大小")
-    parser.add_argument('--lr', type=float, default=0.000001, help="学习率")
+    parser.add_argument('--lr', type=float, default=0.00001, help="学习率")
     parser.add_argument('--momentum', type=float, default=0.999, help="学习率")
     parser.add_argument('--decay', type=float, default=0.00005, help="decay")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--epochs", type=int, default=500, help="训练轮次")
+    parser.add_argument("--epochs", type=int, default=900, help="训练轮次")
     parser.add_argument('--num_workers', type=int, default=4, help="加载数据进程数量")
 
     # ========检测时候使用==========
@@ -130,7 +130,8 @@ if __name__ == '__main__':
     if args.pre_trained:
         model.load_state_dict(torch.load(args.weight_path, map_location=device))
     else:
-        weights_init(model)
+        #weights_init(model)
+        pass #随机初始化
 
     # 是否冻结骨干网络
     for param in model.backbone.parameters():

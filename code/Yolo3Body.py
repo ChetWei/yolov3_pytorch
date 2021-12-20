@@ -22,8 +22,7 @@ from Backbone import darknet53
 def CBL(channel_in, channel_out, kernel_size):
     pad = (kernel_size - 1) // 2 if kernel_size else 0
     net = nn.Sequential(OrderedDict([
-        ("conv", nn.Conv2d(channel_in, channel_out, kernel_size=kernel_size,
-                           stride=1, padding=pad, bias=False)),
+        ("conv", nn.Conv2d(channel_in, channel_out, kernel_size=kernel_size,stride=1, padding=pad, bias=False)),
         ("bn", nn.BatchNorm2d(channel_out)),
         ("relu", nn.LeakyReLU(0.1)),
     ]))

@@ -18,13 +18,11 @@ class BasicResidual(nn.Module):
         channel_1 是残差网络第一个卷积的输出通道数，channel_2是第二个卷积输出通道数=残差最终输出通道数
         """
         super(BasicResidual, self).__init__()
-        self.conv1 = nn.Conv2d(res_input_channel, res_out_c1,
-                               kernel_size=1, stride=1, padding=0, bias=False)
+        self.conv1 = nn.Conv2d(res_input_channel, res_out_c1,kernel_size=1, stride=1, padding=0, bias=False)
         self.bn1 = nn.BatchNorm2d(res_out_c1)
         self.relu1 = nn.LeakyReLU(0.1)
 
-        self.conv2 = nn.Conv2d(res_out_c1, res_out_c2,
-                               kernel_size=3, stride=1, padding=1, bias=False)
+        self.conv2 = nn.Conv2d(res_out_c1, res_out_c2,kernel_size=3, stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(res_out_c2)
         self.relu2 = nn.LeakyReLU(0.1)
 

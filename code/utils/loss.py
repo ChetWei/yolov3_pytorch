@@ -50,7 +50,6 @@ def compute_loss(predictions, targets, model):
             # 得到的iou是一个 长度为 num 的tensor ，1-iou  再求平均
             lbox += (1.0 - iou).mean()  # iou loss
 
-            # 目标分类损失
             # 设置单元格有物体的概率
             # 将之前有目标点的真实框 与预测框(根据anchor的)之间的iou作为 有目标的概率 ？？？ 为什么不直接用1
             tobj[b, anchor, grid_j, grid_i] = iou.detach().clamp(0).type(
@@ -63,10 +62,10 @@ def compute_loss(predictions, targets, model):
                 t[range(num_targets), tcls[layer_index]] = 1 #设置标签的类别为1 onehot
                 lcls += BCEcls(ps[:, 5:], t)  # BCE
 
-        # 置信度损失，正负样本一起计算
+        # 置信度(是否有物体的概率)损失，正负样本一起计算
         lobj += BCEobj(layer_predictions[..., 4], tobj)  # obj loss
 
-    lbox *= 0.05
+    lbox *= 0.1
     lobj *= 1.0  # 是否有物体非常重要
     lcls *= 0.5
 
@@ -149,7 +148,7 @@ def build_targets(p, targets, model):
         # 添加每个目标的类别id 到list中
         tcls.append(c)
     # 返回都是list，每个list的长度都是3，每个元素分别代表了对应的3个尺度的信息
-    # cls[i] 表示这个尺度的几个真实框分别对应的classid
+    # tcls[i] 表示这个尺度的几个真实框分别对应的classid
     # tbox[i] 表示这个尺度的几个真实框的xywh信息，其中xy是单个cell的偏移量
     # indices[i] 表示这个尺度的几个真实框的单位格位置信息 和 这个真实框是由哪几个anchor来预测，以及imageid
     # anch[i] 表示这个尺度的几个真实框，需要用到的 先验框
