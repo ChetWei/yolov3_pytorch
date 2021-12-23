@@ -1,148 +1,153 @@
 # -*- coding: utf-8 -*-
-import re
+import argparse
 
-import imgaug as ia
-import imgaug.augmenters as iaa
-from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
+import tqdm
 
-from PIL import Image, ImageDraw, ImageFont
+import torch
+from torch.utils.data import DataLoader
+from torch.autograd import Variable
+
 import numpy as np
 
-from pathlib import Path
+from terminaltables import AsciiTable
 
-import torchvision.transforms as transforms
-
-
-class ImgAug(object):
-    def __init__(self, augmentations=[]):
-        self.augmentations = augmentations
-
-    def __call__(self, data):
-        print("ImgAug")
+from yolov3_pytorch.models.Yolo3Body import YOLOV3
+from utils.util import get_classes_name, xywh2xyxy, non_max_suppression, get_batch_statistics, ap_per_class
+from config import anchors_mask_list
+from utils.datasets import ListDataSet
+from utils.transforms import DEFAULT_TRANSFORMS
 
 
-class RelativateLabels(object):
+def _create_validation_data_loader(label_path, input_shape, batch_size, num_workers):
+    dataset = ListDataSet(labels_file=label_path, input_shape=input_shape, transform=DEFAULT_TRANSFORMS)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=True,
+        collate_fn=dataset.collate_fn
+    )
+
+    return dataloader,len(dataset)
+
+
+def print_eval_stats(metrics_output, class_names, verbose):
+    if metrics_output is not None:
+        precision, recall, AP, f1, ap_class = metrics_output
+        if verbose:
+            # Prints class AP and mean AP
+            ap_table = [["Index", "Class", "AP"]]
+            for i, c in enumerate(ap_class):
+                ap_table += [[c, class_names[c], "%.5f" % AP[i]]]
+            print(AsciiTable(ap_table).table)
+        print(f"---- mAP {AP.mean():.5f} ----")
+    else:
+        print("---- mAP not measured (no detections found by model) ----")
+
+
+def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, nms_thres, verbose):
+    """Evaluate model on validation dataset.
+
+    :param model: Model to evaluate
+    :type model: models.Darknet
+    :param dataloader: Dataloader provides the batches of images with targets
+    :type dataloader: DataLoader
+    :param class_names: List of class names
+    :type class_names: [str]
+    :param img_size: Size of each image dimension for yolo
+    :type img_size: int
+    :param iou_thres: IOU threshold required to qualify as detected
+    :type iou_thres: float
+    :param conf_thres: Object confidence threshold
+    :type conf_thres: float
+    :param nms_thres: IOU threshold for non-maximum suppression
+    :type nms_thres: float
+    :param verbose: If True, prints stats of model
+    :type verbose: bool
+    :return: Returns precision, recall, AP, f1, ap_class
     """
-    目标框坐标根据宽高归一化
-    """
+    model.eval()  # Set model to evaluation mode
 
-    def __init__(self):
-        pass
+    Tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor
 
-    def __call__(self, data):
-        img, boxes = data
-        h, w, _ = img.shape
-        boxes[:, [1, 3]] /= w
-        boxes[:, [2, 4]] /= h
-        return img, boxes
+    labels = []
+    sample_metrics = []  # List of tuples (TP, confs, pred)
 
 
-# 14,36,205,180,289 10,51,160,150,292 10,295,138,450,290
-def test():
-    pil_img = Image.open("/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000030.jpg")
-    np_img = np.array(pil_img)
+    for imgs, targets in tqdm.tqdm(dataloader, desc="Validating"):
+        # Extract labels
+        labels += targets[:, 1].tolist()
+        # Rescale target
+        targets[:, 2:] = xywh2xyxy(targets[:, 2:])
+        targets[:, 2:] *= img_size
 
-    bbs = BoundingBoxesOnImage([
-        BoundingBox(x1=36, y1=205, x2=180, y2=289, label="bicycle"),
-        BoundingBox(x1=51, y1=160, x2=150, y2=292, label="person"),
-        BoundingBox(x1=295, y1=138, x2=450, y2=290, label="person")
-    ], shape=np_img.shape)
+        imgs = Variable(imgs.type(Tensor), requires_grad=False)
 
-    bounding_boxes = bbs.clip_out_of_image()
-    print(bounding_boxes)
+        with torch.no_grad():
+            outputs = model(imgs)
+            outputs = non_max_suppression(outputs, conf_thres=conf_thres, iou_thres=nms_thres)
 
-    # Rescale image and bounding boxes
-    image_rescaled = ia.imresize_single_image(np_img, (1000, 1000))
-    bbs_rescaled = bbs.on(image_rescaled)  # 获得放缩后的坐标
+        sample_metrics += get_batch_statistics(outputs, targets, iou_threshold=iou_thres)
 
-    bounding_boxes = bbs_rescaled.clip_out_of_image()
-    print(bounding_boxes)
+    if len(sample_metrics) == 0:  # No detections over whole validation set.
+        print("---- No detections over whole validation set ----")
+        return None
 
-    # Draw image before/after rescaling and with rescaled bounding boxes
-    image_bbs = bbs.draw_on_image(np_img, size=2)
-    image_rescaled_bbs = bbs_rescaled.draw_on_image(image_rescaled, size=2)
+    # Concatenate sample statistics
+    true_positives, pred_scores, pred_labels = [
+        np.concatenate(x, 0) for x in list(zip(*sample_metrics))]
+    metrics_output = ap_per_class(
+        true_positives, pred_scores, pred_labels, labels)
 
-    pil_i = Image.fromarray(image_rescaled_bbs)
-    pil_i.show()
+    print_eval_stats(metrics_output, class_names, verbose)
 
-
-def test2():
-    # 先将图片进行增强，再进行图片和bbox的调整  最后返回归一化后的坐标
-
-    pil_img = Image.open("/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000030.jpg")
-    np_img = np.array(pil_img)
-
-    aug = iaa.Sequential([
-        # position="center-center" 两边填充
-        iaa.PadToAspectRatio(aspect_ratio=1.0, position="center-center").to_deterministic()
-    ])
-
-    img_aug = aug(image=np_img)
-
-    pil_i = Image.fromarray(img_aug)
-    pil_i.show()
+    return metrics_output
 
 
-class Colors:
-    # Ultralytics color palette https://ultralytics.com/
-    def __init__(self):
-        # hex = matplotlib.colors.TABLEAU_COLORS.values()
-        hex = ('FF3838', 'FF9D97', 'FF701F', 'FFB21D', 'CFD231', '48F90A', '92CC17', '3DDB86', '1A9334', '00D4BB',
-               '2C99A8', '00C2FF', '344593', '6473FF', '0018EC', '8438FF', '520085', 'CB38FF', 'FF95C8', 'FF37C7')
-        self.palette = [self.hex2rgb('#' + c) for c in hex]
-        self.n = len(self.palette)
+def run():
+    parser = argparse.ArgumentParser(description="Evaluate validation data.")
 
-    def __call__(self, i, bgr=False):
-        c = self.palette[int(i) % self.n]
-        return (c[2], c[1], c[0]) if bgr else c
+    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_vocc_50 (1).pth",
+                        help="权重文件")
+    parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")
+    parser.add_argument("--label_path", type=str, default="../data/annotation/voc2007_test.txt", help="标签文件")
+    parser.add_argument("-b", "--batch_size", type=int, default=8)
+    parser.add_argument("--img_size", type=int, default=416, help="输入Yolo的图片尺度")
+    parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
+    parser.add_argument("--num_workers", type=int, default=1, help="dataloader的线程")
 
-    @staticmethod
-    def hex2rgb(h):  # rgb order (PIL)
-        return tuple(int(h[1 + i:1 + i + 2], 16) for i in (0, 2, 4))
+    parser.add_argument("--iou_thres", type=float, default=0.5, help="IOU threshold required to qualify as detected")
+    parser.add_argument("--conf_thres", type=float, default=0.01, help="Object confidence threshold")
+    parser.add_argument("--nms_thres", type=float, default=0.4, help="IOU threshold for non-maximum suppression")
+    args = parser.parse_args()
+    print(f"Command line arguments: {args}")
 
-# 判断是否为中文字符
-def is_chinese(s='人工智能'):
-    # Is string composed of any Chinese characters?
-    return re.search('[\u4e00-\u9fff]', s)
+    # 获取制作数据集时候设置的类别列表
+    classes = get_classes_name(args.classes)
 
+    # 加载测试数据集
+    # 加载模型
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # 设置非训练模型加载
+    model = YOLOV3(cls_num=len(classes), anchors=anchors_mask_list, img_size=args.img_size, training=False).to(device)
+    # 加载模型参数
+    model.load_state_dict(torch.load(args.weight_path, map_location=device))
+    # 创建dataloader
+    dataloader,dataset_len = _create_validation_data_loader(args.label_path, args.input_shape, args.batch_size, args.num_workers)
+    # 开始检测和评估
+    metrics_output = _evaluate(
+        model,
+        dataloader,
+        classes,
+        args.img_size,
+        args.iou_thres,
+        args.conf_thres,
+        args.nms_thres,
+        verbose=True)
 
-def check_font(font='../config/Arial.ttf', size=10):
-    font = Path(font)
-    return ImageFont.truetype(str(font) if font.exists() else font.name, size)
-
-# pil库进行标记图片目标
-def draw(img_path, boxes, label="person"):
-    # 打开图片
-    pil_img = Image.open(img_path)
-    np_img = np.array(pil_img)
-    default_fontsize = max(round(sum(pil_img.size) / 2 * 0.035), 12)
-    font = check_font(size=default_fontsize)
-    line_width = max(round(sum(np_img.shape) / 2 * 0.003), 2) #目标框的线条宽度
-    draw = ImageDraw.Draw(pil_img)
-    color = colors(0)
-    txt_color = (255, 255, 255)
-
-    for box in boxes:
-        id, x1, y1, x2, y2 = box
-        # 1.先画目标检测框
-        draw.rectangle([x1, y1, x2, y2], width=line_width, outline=color)
-        # 2.画左上角标签 包括框框和text
-        # 获取标签字体的的宽度
-        w, h = font.getsize(label)
-        not_outside = y1 - h >= 0  # 判断label是否超出了图片范围
-        # 先画label的框框
-        draw.rectangle([x1,
-                        y1 - h if not_outside else y1,
-                        x1 + w + 1,
-                        y1 + 1 if not_outside else y1 + h + 1], fill=color)
-        # 画label的字体
-        draw.text([x1, y1 - h if not_outside else not_outside], label, fill=txt_color,font=font)
-
-    pil_img.show()
+    precision, recall, AP, f1, ap_class = metrics_output
 
 
 if __name__ == '__main__':
-    colors = Colors()
-    boxes = [[14.6, 36, 205, 180, 289], [10, 51, 160, 150, 292], [10, 295, 138, 450, 290]]
-    path = "/Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages/000030.jpg"
-    draw(path, boxes)
+    run()

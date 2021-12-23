@@ -1,0 +1,24 @@
+#配置voc数据集
+
+#图片目录 更换训练环境需要修改
+#img_home: /media/root/5A72B65672B6371B/weimingan/dataset/VOCdevkit/VOC2007/JPEGImages
+img_home: /Users/weimingan/work/dataset/VOCdevkit/VOC2007/JPEGImages
+
+#======================制作数据集使用======================
+#原始标签路径
+annotations_path: /Users/weimingan/work/dataset/VOCdevkit/VOC2007/Annotations
+#划分数据集
+segments:
+  - /Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/train.txt
+  - /Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/val.txt
+  - /Users/weimingan/work/dataset/VOCdevkit/VOC2007/ImageSets/Main/test.txt
+#======================制作数据集使用 end======================
+targets:
+  - data/annotation/voc2007_train.txt
+  - data/annotation/voc2007_val.txt
+  - data/annotation/voc2007_test.txt
+
+
+num_classes: 20
+classes_names: ['cat','bus','horse','chair','car','aeroplane','pottedplant','cow','dog','boat','person','bird','train',
+                'motorbike','bicycle','sofa','diningtable','sheep','bottle','tvmonitor']
