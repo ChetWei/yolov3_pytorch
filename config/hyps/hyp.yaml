@@ -1,11 +1,12 @@
 #超参数设置
 
-lr: 0.00001 #稳定阶段学习率
+lr: 0.000001 #稳定阶段学习率
 momentum: 0.999
 weight_decay: 0.0005
+decay_pos: 0.7 #大于 epoch*0.7 开始下降学习率
+lr_decay: 0.978 #每个epoch的lr下降率
 
-
-warmup_epochs: 5.0  # warmup epochs
+warmup_epochs: 10.0  # warmup epochs
 warmup_momentum: 0.8  # warmup initial momentum
 warmup_bias_lr: 0.1  # warmup initial bias lr
 
