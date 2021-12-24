@@ -8,18 +8,19 @@ from torch.utils.data import DataLoader
 from torch.autograd import Variable
 
 import numpy as np
+import yaml
 
 from terminaltables import AsciiTable
 
 from yolov3_pytorch.models.Yolo3Body import YOLOV3
 from utils.util import get_classes_name, xywh2xyxy, non_max_suppression, get_batch_statistics, ap_per_class
-from config import anchors_mask_list
 from utils.datasets import ListDataSet
 from utils.transforms import DEFAULT_TRANSFORMS
 
 
-def _create_validation_data_loader(label_path, input_shape, batch_size, num_workers):
-    dataset = ListDataSet(labels_file=label_path, input_shape=input_shape, transform=DEFAULT_TRANSFORMS)
+# 创建验证数据集
+def _create_validation_data_loader(label_path, img_home, input_shape, batch_size, num_workers):
+    dataset = ListDataSet(label_path, img_home, input_shape, transform=DEFAULT_TRANSFORMS)
     dataloader = DataLoader(
         dataset,
         batch_size=batch_size,
@@ -29,9 +30,10 @@ def _create_validation_data_loader(label_path, input_shape, batch_size, num_work
         collate_fn=dataset.collate_fn
     )
 
-    return dataloader,len(dataset)
+    return dataloader, len(dataset)
 
 
+# 输出评估的结果状态
 def print_eval_stats(metrics_output, class_names, verbose):
     if metrics_output is not None:
         precision, recall, AP, f1, ap_class = metrics_output
@@ -74,7 +76,6 @@ def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, n
     labels = []
     sample_metrics = []  # List of tuples (TP, confs, pred)
 
-
     for imgs, targets in tqdm.tqdm(dataloader, desc="Validating"):
         # Extract labels
         labels += targets[:, 1].tolist()
@@ -108,14 +109,15 @@ def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, n
 def run():
     parser = argparse.ArgumentParser(description="Evaluate validation data.")
 
-    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_vocc_50 (1).pth",
+    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_1100.pth",
                         help="权重文件")
-    parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")
-    parser.add_argument("--label_path", type=str, default="../data/annotation/voc2007_test.txt", help="标签文件")
     parser.add_argument("-b", "--batch_size", type=int, default=8)
     parser.add_argument("--img_size", type=int, default=416, help="输入Yolo的图片尺度")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--num_workers", type=int, default=1, help="dataloader的线程")
+    parser.add_argument("--num_workers", type=int, default=2, help="dataloader的线程")
+
+    parser.add_argument("--data", type=str, default="./data/voc2007.yaml", help="训练的数据集配置")
+    parser.add_argument("--model", type=str, default="./models/yolov3.yaml", help="训练的模型配置")
 
     parser.add_argument("--iou_thres", type=float, default=0.5, help="IOU threshold required to qualify as detected")
     parser.add_argument("--conf_thres", type=float, default=0.01, help="Object confidence threshold")
@@ -123,27 +125,38 @@ def run():
     args = parser.parse_args()
     print(f"Command line arguments: {args}")
 
-    # 获取制作数据集时候设置的类别列表
-    classes = get_classes_name(args.classes)
+    # 数据集配置
+    with open(args.data, errors='ignore') as f:
+        data_params = yaml.safe_load(f)
+
+    # 模型基本配置
+    with open(args.model, errors='ignore') as f:
+        model_params = yaml.safe_load(f)
 
     # 加载测试数据集
     # 加载模型
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # 设置非训练模型加载
-    model = YOLOV3(cls_num=len(classes), anchors=anchors_mask_list, img_size=args.img_size, training=False).to(device)
+    model = YOLOV3(cls_num=data_params['num_classes'], anchors=model_params['anchors'], img_size=args.img_size,
+                   training=False).to(device)
     # 加载模型参数
     model.load_state_dict(torch.load(args.weight_path, map_location=device))
     # 创建dataloader
-    dataloader,dataset_len = _create_validation_data_loader(args.label_path, args.input_shape, args.batch_size, args.num_workers)
+    dataloader, dataset_len = _create_validation_data_loader(
+        label_path=data_params['targets'][2],  # 测试数据集
+        img_home=data_params['img_home'],
+        input_shape=args.input_shape,
+        batch_size=args.batch_size,
+        num_workers=args.num_workers)
     # 开始检测和评估
     metrics_output = _evaluate(
-        model,
-        dataloader,
-        classes,
-        args.img_size,
-        args.iou_thres,
-        args.conf_thres,
-        args.nms_thres,
+        model=model,
+        dataloader=dataloader,
+        class_names=data_params['classes_names'],
+        img_size=args.img_size,
+        iou_thres=args.iou_thres,
+        conf_thres=args.conf_thres,
+        nms_thres=args.nms_thres,
         verbose=True)
 
     precision, recall, AP, f1, ap_class = metrics_output
