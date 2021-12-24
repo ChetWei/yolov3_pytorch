@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import argparse
+import math
+
 import torch
 import yaml
 import time
@@ -65,6 +67,13 @@ def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_
     box_loss = 0
     obj_loss = 0
     cls_loss = 0
+
+    # 当训练轮数快结束了，开始降低学习率
+    if (epoch + 1) / epoches > hyp_settings['decay_pos']:
+        new_lr = hyp_settings['lr'] * math.pow(hyp_settings['lr_decay'],
+                                               int((epoch + 1) - (epoches * hyp_settings['decay_pos'])))
+        update_lr(optimizer, new_lr)
+
     with tqdm(total=epoch_steps, postfix=dict, mininterval=0.3) as pbar:
         for step, (imgs, targets) in enumerate(dataloader):
 
@@ -72,17 +81,12 @@ def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_
             targets = targets.to(device)
             # 梯度清零
             optimizer.zero_grad()
-            currnt_step = epoch_steps * epoch + (step + 1)  # 所有轮次中当前的step
+            currnt_step = (epoch_steps * epoch) + (step + 1)  # 所有轮次中当前的step
 
             # warmup 阶段的学习率
             if warmup_steps > currnt_step:
                 #  更新学习率
                 new_lr = hyp_settings['lr'] * (currnt_step / warmup_steps)
-                update_lr(optimizer, new_lr)
-
-            # 当训练轮数快结束了，开始降低学习率
-            if (epoch + 1) / epoches > 0.8:
-                new_lr = new_lr * 0.988
                 update_lr(optimizer, new_lr)
 
             # 向前传播
@@ -142,16 +146,16 @@ def str2bool(v):
 def parse_args():
     parser = argparse.ArgumentParser(description="Trains the YOLO3 model.")
 
-    parser.add_argument('--cuda_id', type=int, default=0, help="使用的gpu")
+    parser.add_argument('--cuda_id', type=int, default=1, help="使用的gpu")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
-    parser.add_argument("--epochs", type=int, default=900, help="训练的轮次")
+    parser.add_argument("--epochs", type=int, default=300, help="训练的轮次")
     parser.add_argument("--save_per_epoch", type=int, default=20, help="每多少轮保存一次权重")
     parser.add_argument('--batch_size', type=int, default=4, help="batch的大小")
     parser.add_argument('--num_workers', type=int, default=2, help="加载数据进程数量")
 
     parser.add_argument('--adam', type=str2bool, default=True, help="使用Adam or SGD")
-    parser.add_argument('--pre_trained', type=str2bool, default=False, help="使用预训练模型")
-    parser.add_argument("--weight_path", type=str, default="./weights/yolov3_voc_500.pth", help="预训练权重路径")
+    parser.add_argument('--pre_trained', type=str2bool, default=True, help="使用预训练模型")
+    parser.add_argument("--weight_path", type=str, default="./weights/yolov3_voc_200.pth", help="预训练权重路径")
 
     parser.add_argument("--hyp", type=str, default="./config/hyps/hyp.yaml", help="超参数配置文件")
     parser.add_argument("--data", type=str, default="./data/voc2007.yaml", help="训练的数据集配置")
@@ -234,7 +238,7 @@ def main(args):
         # 每save_per_epoch轮就保存一次权重
         if ((epoch + 1) % args.save_per_epoch == 0):
             save_model(model, args.model_name, (epoch + 1), weights_dir=args.weight_dir)
-
+            #optimizer.state_dict() 保存训练器状态，方便下一次训练
 
 if __name__ == '__main__':
     # 获得代码参数

@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 /weights/
 /output/
+/data/sample/
+/data/logs

@@ -6,6 +6,7 @@ import numpy as np
 
 from PIL import Image, ImageDraw
 
+import yaml
 import torch
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
@@ -93,7 +94,7 @@ def detect2(model, input_dir, output_dir, img_size, conf_thres, nms_thres, class
     dataset = LoadImages(input_dir, transform)
 
     vid_path, vid_writer = None, None  # 视频输出标记
-    #加载数据
+    # 加载数据
     for path, image, im0s, vid_cap, s in dataset:
         input_image = Variable(image.type(Tensor))
         input_image = input_image.unsqueeze(0)
@@ -108,9 +109,9 @@ def detect2(model, input_dir, output_dir, img_size, conf_thres, nms_thres, class
         # 获取原始媒体的路径，原始cv2读取的图片，第几帧
         p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
         p = Path(p)
-        save_path = os.path.join(output_dir,p.name)  # 保存的文件名称
+        save_path = os.path.join(output_dir, p.name)  # 保存的文件名称
         target_num = detections[0].shape[0]
-        if  target_num> 0:  # 判断是否有预测目标
+        if target_num > 0:  # 判断是否有预测目标
             # 将预测的bbox 转换为原始图像尺寸的比例 img_size 为当前的尺寸  im0.shape[:2] 是原始的 （H,W）
             detections = rescale_boxes(detections[0], img_size, im0.shape[:2])
             # 使用标签工具
@@ -122,7 +123,7 @@ def detect2(model, input_dir, output_dir, img_size, conf_thres, nms_thres, class
                 label = class_name + " " + str(round(conf.numpy().tolist(), 2))
                 annotator.box_label(xyxy, label, color)  # 画目标框和标签
 
-        print(s,f"target {target_num}")
+        print(s, f"target {target_num}")
         # 保存结果
         if dataset.mode == 'image':
             cv2.imwrite(save_path, im0)  # 保存经过标记的图片
@@ -193,46 +194,45 @@ def _draw_and_save_output_image(image_path, detections, img_size, output_path, c
 
 
 def run():
-    from config import anchors_mask_list
-
     parser = argparse.ArgumentParser(description="检测图片目标")
 
-    parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_1100.pth",
+    parser.add_argument("-w", "--weight_path", type=str,
+                        default="/Users/weimingan/work/weights/yolov3_voc_40_2021-12-24_18:16:19.pth",
                         help="权重文件")
-    parser.add_argument("-i", "--img_dir", type=str, default="../data/sample", help="待检测图片存放路径")
-    parser.add_argument("-c", "--classes", type=str, default="../config/voc_names.txt", help="类别文件")
-    parser.add_argument("-o", "--output_path", type=str, default="../output", help="输出文件夹")
+    parser.add_argument("-i", "--img_dir", type=str, default="./data/sample", help="待检测图片存放路径")
+    parser.add_argument("-o", "--output_path", type=str, default="./output", help="输出文件夹")
     parser.add_argument("-b", "--batch_size", type=int, default=1)
     parser.add_argument("--img_size", type=int, default=416, help="输入Yolo的图片尺度")
-
     parser.add_argument("--n_cpu", type=int, default=1, help="dataloader的线程")
+    parser.add_argument("--data", type=str, default="./data/voc2007.yaml", help="训练的数据集配置")
+    parser.add_argument("--model", type=str, default="./models/yolov3.yaml", help="训练的模型配置")
+
     parser.add_argument("--conf_thres", type=float, default=0.2, help="有物体置信度阈值")
     parser.add_argument("--nms_thres", type=float, default=0.3, help="NMS阈值")
 
     args = parser.parse_args()
     print(f"Command line arguments: {args}")
 
-    # 获取制作数据集时候设置的类别列表
-    classes = get_classes_name(args.classes)
+    # 数据集配置
+    with open(args.data, errors='ignore') as f:
+        data_params = yaml.safe_load(f)
+
+    # 模型基本配置
+    with open(args.model, errors='ignore') as f:
+        model_params = yaml.safe_load(f)
 
     # 加载模型
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # 设置非训练模型加载
-    model = YOLOV3(cls_num=len(classes), anchors=anchors_mask_list, img_size=args.img_size, training=False).to(device)
+    model = YOLOV3(cls_num=data_params['num_classes'], anchors=model_params['anchors'], img_size=args.img_size,
+                   training=False).to(device)
     # 加载模型参数
     model.load_state_dict(torch.load(args.weight_path, map_location=device))
 
-    # ============旧版本============
-    # # 创建dataloader
-    # dataloader = _create_data_loader(args.img_dir, args.batch_size, args.img_size, args.n_cpu)
-    # # 检测图片
-    # img_detections, imgs = detect(model, dataloader, args.output_path, args.img_size, args.conf_thres, args.nms_thres)
-    # # 画图并输出图片
-    # _draw_and_save_output_images(img_detections, imgs, args.img_size, args.output_path, classes)
 
     # ============新版本============
-    detect2(model, args.img_dir,args.output_path, args.img_size, args.conf_thres, args.nms_thres, classes)
+    detect2(model, args.img_dir, args.output_path, args.img_size, args.conf_thres, args.nms_thres, data_params['classes_names'])
 
 
 if __name__ == '__main__':

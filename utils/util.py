@@ -44,7 +44,8 @@ def save_model(model, model_name, epoch, weights_dir):
     :param epoch: int, 表明当前训练的是第几个epoch
     :param models_pth_path: 模型保存路径
     """
-    name = "{}_{}.pth".format(model_name, epoch)
+    c_time = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
+    name = f"{model_name}_{epoch}_{c_time}.pth"
     if not os.path.exists(weights_dir):
         # 创建目录
         os.makedirs(weights_dir)
