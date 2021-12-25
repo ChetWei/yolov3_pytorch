@@ -22,7 +22,7 @@ from .Backbone import darknet53
 def CBL(channel_in, channel_out, kernel_size):
     pad = (kernel_size - 1) // 2 if kernel_size else 0
     net = nn.Sequential(OrderedDict([
-        ("conv", nn.Conv2d(channel_in, channel_out, kernel_size=kernel_size,stride=1, padding=pad, bias=False)),
+        ("conv", nn.Conv2d(channel_in, channel_out, kernel_size=kernel_size, stride=1, padding=pad, bias=False)),
         ("bn", nn.BatchNorm2d(channel_out)),
         ("relu", nn.LeakyReLU(0.1)),
     ]))
@@ -54,12 +54,11 @@ def make_last_layers(filters_list, first_in_filter, final_out_filter):
 
 
 class YOLOV3(nn.Module):
-    def __init__(self, cls_num, anchors, img_size=416,training=True):
+    def __init__(self, cls_num, anchors, img_size=416):
         """
         :param cls_num: 类别个数
         """
         super(YOLOV3, self).__init__()
-        self.training = training
 
         # 生成darknet53的主干网络
         # 输入尺寸 412x412
@@ -104,11 +103,11 @@ class YOLOV3(nn.Module):
             final_out_filter=3 * (self.cls_num + 5)
         )
 
-        self.yolo_out_layer = [YoloOutLayer(anchors[0], self.cls_num, self.img_size,self.training),
-                               YoloOutLayer(anchors[1], self.cls_num, self.img_size,self.training),
-                               YoloOutLayer(anchors[2], self.cls_num, self.img_size,self.training)]
+        self.yolo_out_layer = [YoloOutLayer(anchors[0], self.cls_num, self.img_size),
+                               YoloOutLayer(anchors[1], self.cls_num, self.img_size),
+                               YoloOutLayer(anchors[2], self.cls_num, self.img_size)]
 
-    def forward(self, x):
+    def forward(self, x,training=True):
         #  获得三个有效特征层，他们的shape分别是：
         #   52,52,256; 26,26,512; 13,13,1024
         x2, x1, x0 = self.backbone(x)
@@ -146,24 +145,24 @@ class YOLOV3(nn.Module):
         x2_in = torch.cat([x2_in, x2], 1)
         head_out2 = self.last_layer2(x2_in)
 
-        out0 = self.yolo_out_layer[0](head_out0)
-        out1 = self.yolo_out_layer[1](head_out1)
-        out2 = self.yolo_out_layer[2](head_out2)
+        out0 = self.yolo_out_layer[0](head_out0,training)
+        out1 = self.yolo_out_layer[1](head_out1,training)
+        out2 = self.yolo_out_layer[2](head_out2,training)
 
         yolo_outputs = [out0, out1, out2]
 
-        #训练和测试返回的数据维度不一样
-        if self.training:
-            return out0,out1,out2
+        # 训练和测试返回的数据维度不一样
+        if training:
+            return out0, out1, out2
 
-        return torch.cat(yolo_outputs,1)
-
+        #预测返回
+        return torch.cat(yolo_outputs, 1)
 
 
 class YoloOutLayer(nn.Module):
     "检测之前的预数据处理"
 
-    def __init__(self, anchors, num_classes, img_size,trainnig):
+    def __init__(self, anchors, num_classes, img_size):
         """
         :param anchors: [[w,h],[w,h],[w,h]]
         :param num_classes: 类别个数
@@ -173,7 +172,7 @@ class YoloOutLayer(nn.Module):
         self.num_classes = num_classes
         self.num_attr = num_classes + 5
         self.img_size = img_size  # 图片尺寸 默认是正方形
-        self.training = trainnig
+
         self.grid = torch.zeros(1)
         #
         anchors = torch.tensor(list(chain(*anchors))).float().view(-1, 2)
@@ -182,7 +181,7 @@ class YoloOutLayer(nn.Module):
             'anchor_grid', anchors.clone().view(1, -1, 1, 1, 2))  # ？
         self.stride = None  # 先定义
 
-    def forward(self, x):
+    def forward(self, x, training=True):
         # 调整一下维度，并设置输出维度的一些基本信息
         stride = self.img_size // x.size(2)  # 单元格的长度
         self.stride = stride
@@ -190,19 +189,18 @@ class YoloOutLayer(nn.Module):
         # [bs, 75, 13, 13] -> [bs,3,25,13,13] -> [bs,3,13,13,25]
         x = x.view(bs, self.num_anchors, self.num_attr, feature_h, feature_w).permute(0, 1, 3, 4, 2).contiguous()
 
-        #如果不是训练，修改数据返回形式
-        if not self.training:
+        # 如果不是训练，修改数据返回形式
+        if not training:
             if self.grid.shape[2:4] != x.shape[2:4]:
                 self.grid = self._make_grid(feature_w, feature_h).to(x.device)
 
             x[..., 0:2] = (x[..., 0:2].sigmoid() + self.grid) * stride  # xy由偏移量转为绝对像素值
             x[..., 2:4] = torch.exp(x[..., 2:4]) * self.anchor_grid  # wh
-            x[..., 4:] = x[..., 4:].sigmoid() #类别
+            x[..., 4:] = x[..., 4:].sigmoid()  # 类别
             x = x.view(bs, -1, self.num_attr)
-            #[bs,507,25] 3x13x13=507
+            # [bs,507,25] 3x13x13=507
 
         return x
-
 
     @staticmethod
     def _make_grid(nx=20, ny=20):
@@ -214,10 +212,9 @@ if __name__ == '__main__':
     x = torch.rand((1, 3, 640, 640))
 
     from config import anchors_mask_list
+
     num_classes = 20
 
-    model = YOLOV3(20, anchors_mask_list,img_size=640,training=True)
+    model = YOLOV3(20, anchors_mask_list, img_size=640, training=True)
     out = model(x)
     print(out)
-
-

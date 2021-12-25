@@ -13,11 +13,12 @@ from torch.utils.data import DataLoader
 
 from utils.datasets import ListDataSet
 from utils.loss import compute_loss
-from utils.util import weights_init, get_lr, save_model
+from utils.util import weights_init, get_lr, save_model,str2bool,update_lr
 from utils.augmentations import AUGMENTATION_TRANSFORMS
 
 from models.Yolo3Body import YOLOV3
-from test import _create_validation_data_loader,_evaluate
+from test import _create_validation_data_loader, _evaluate
+
 
 def create_dataloader(label_path, img_home, input_shape, batch_size, num_workers):
     """
@@ -40,11 +41,6 @@ def create_dataloader(label_path, img_home, input_shape, batch_size, num_workers
     )
     return dataloader, len(dataset)
 
-
-def update_lr(optimizer, lr):
-    #  更新学习率
-    for g in optimizer.param_groups:
-        g['lr'] = lr
 
 
 def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_steps, warmup_steps, hyp_params,
@@ -71,7 +67,7 @@ def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_
     # 当训练轮数快结束了，开始降低学习率
     if (epoch + 1) / epoches > hyp_params['decay_pos']:
         new_lr = hyp_params['lr'] * math.pow(hyp_params['lr_decay'],
-                                               int((epoch + 1) - (epoches * hyp_params['decay_pos'])))
+                                             int((epoch + 1) - (epoches * hyp_params['decay_pos'])))
         update_lr(optimizer, new_lr)
 
     with tqdm(total=epoch_steps, postfix=dict, mininterval=0.3) as pbar:
@@ -132,15 +128,7 @@ def train_one_epoch(model, dataloader, optimizer, device, epoch, epoches, epoch_
             pbar.update(1)
 
 
-def str2bool(v):
-    if isinstance(v, bool):
-        return v
-    if v.lower() in ('yes', 'true', 't', 'y', '1'):
-        return True
-    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
-        return False
-    else:
-        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 
 
 def parse_args():
@@ -149,16 +137,17 @@ def parse_args():
     parser.add_argument('--cuda_id', type=int, default=1, help="使用的gpu")
     parser.add_argument('--input_shape', type=list, default=[416, 416], help="输入图片的尺寸 w h")
     parser.add_argument("--img_size", type=int, default=416, help="输入Yolo的图片尺度")
-    parser.add_argument("--epochs", type=int, default=300, help="训练的轮次")
-    parser.add_argument("--save_per_epoch", type=int, default=20, help="每多少轮保存一次权重")
+    parser.add_argument("--epochs", type=int, default=1200, help="训练的轮次")
+    parser.add_argument("--save_interval", type=int, default=50, help="每多少轮保存一次权重")
     parser.add_argument('--batch_size', type=int, default=4, help="batch的大小")
-    parser.add_argument('--num_workers', type=int, default=2, help="加载数据进程数量")
+    parser.add_argument('--num_workers', type=int, default=3, help="加载数据进程数量")
 
     parser.add_argument("--evaluation_interval", type=int, default=100, help="每多少轮验证一次")
 
     parser.add_argument('--adam', type=str2bool, default=True, help="使用Adam or SGD")
-    parser.add_argument('--pre_trained', type=str2bool, default=True, help="使用预训练模型")
-    parser.add_argument("--weight_path", type=str, default="./weights/yolov3_voc_200.pth", help="预训练权重路径")
+    parser.add_argument('--pre_trained', type=str2bool, default=False, help="使用预训练模型")
+    parser.add_argument("--weight_path", type=str, default="./weights/yolov3_voc_80_2021-12-24_23:15:02.pth",
+                        help="预训练权重路径")
 
     parser.add_argument("--hyp", type=str, default="./config/hyps/hyp.yaml", help="超参数配置文件")
     parser.add_argument("--data", type=str, default="./data/voc2007.yaml", help="训练的数据集配置")
@@ -241,32 +230,32 @@ def main(args):
         input_shape=args.input_shape,
         batch_size=args.batch_size,
         num_workers=args.num_workers)
-    
 
-    epoch_steps = train_len // args.batch_size  # 每轮有多少个step
+    epoch_steps = len(train_dataloader)  # 每轮有多少个step
     warmup_steps = hyp_params['warmup_epochs'] * epoch_steps  # warmup step 的数量
     for epoch in range(args.epochs):
-        #训练一个epoch
+        # 训练一个epoch
         train_one_epoch(model, train_dataloader, optimizer, device, epoch, args.epochs, epoch_steps, warmup_steps,
                         hyp_params, writer)
 
         # 每save_per_epoch轮就保存一次权重
-        if ((epoch + 1) % args.save_per_epoch == 0):
+        if ((epoch + 1) % args.save_interval == 0):
             save_model(model, args.model_name, (epoch + 1), weights_dir=args.weight_dir)
-            #optimizer.state_dict() 保存训练器状态，方便下一次训练
+            # optimizer.state_dict() 保存训练器状态，方便下一次训练
 
-        #验证模型
-        if (epoch+1) % args.evaluation_interval == 0 :
+        # 验证模型
+        if (epoch + 1) % args.evaluation_interval == 0:
             print("\n---- Evaluating Model ----")
             metrics_output = _evaluate(
                 model=model,
-                dataloader=val_dataloader, #使用验证数据集
+                dataloader=val_dataloader,  # 使用验证数据集
                 class_names=data_params['classes_names'],
                 img_size=args.img_size,
                 iou_thres=args.iou_thres,
                 conf_thres=args.conf_thres,
                 nms_thres=args.nms_thres,
-                verbose=True)
+                verbose=True,
+                device=device)
 
 
 if __name__ == '__main__':

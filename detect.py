@@ -101,7 +101,7 @@ def detect2(model, input_dir, output_dir, img_size, conf_thres, nms_thres, class
         # 预测
         with torch.no_grad():
             # (batch_size,num,25)
-            detections = model(input_image)
+            detections = model(input_image, training=False)
             # Non-Maximum Suppression 非极大抑制 shape（num,6）
             detections = non_max_suppression(detections, conf_thres, nms_thres)
 
@@ -197,7 +197,7 @@ def run():
     parser = argparse.ArgumentParser(description="检测图片目标")
 
     parser.add_argument("-w", "--weight_path", type=str,
-                        default="/Users/weimingan/work/weights/yolov3_voc_40_2021-12-24_18:16:19.pth",
+                        default="/Users/weimingan/work/weights/yolov3_voc_200_2021-12-25_08:46:33.pth",
                         help="权重文件")
     parser.add_argument("-i", "--img_dir", type=str, default="./data/sample", help="待检测图片存放路径")
     parser.add_argument("-o", "--output_path", type=str, default="./output", help="输出文件夹")
@@ -225,14 +225,14 @@ def run():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # 设置非训练模型加载
-    model = YOLOV3(cls_num=data_params['num_classes'], anchors=model_params['anchors'], img_size=args.img_size,
-                   training=False).to(device)
+    model = YOLOV3(cls_num=data_params['num_classes'], anchors=model_params['anchors'], img_size=args.img_size).to(
+        device)
     # 加载模型参数
     model.load_state_dict(torch.load(args.weight_path, map_location=device))
 
-
     # ============新版本============
-    detect2(model, args.img_dir, args.output_path, args.img_size, args.conf_thres, args.nms_thres, data_params['classes_names'])
+    detect2(model, args.img_dir, args.output_path, args.img_size, args.conf_thres, args.nms_thres,
+            data_params['classes_names'])
 
 
 if __name__ == '__main__':

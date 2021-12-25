@@ -12,8 +12,8 @@ import yaml
 
 from terminaltables import AsciiTable
 
-from yolov3_pytorch.models.Yolo3Body import YOLOV3
-from utils.util import get_classes_name, xywh2xyxy, non_max_suppression, get_batch_statistics, ap_per_class
+from models.Yolo3Body import YOLOV3
+from utils.util import xywh2xyxy, non_max_suppression, get_batch_statistics, ap_per_class
 from utils.datasets import ListDataSet
 from utils.transforms import DEFAULT_TRANSFORMS
 
@@ -48,7 +48,7 @@ def print_eval_stats(metrics_output, class_names, verbose):
         print("---- mAP not measured (no detections found by model) ----")
 
 
-def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, nms_thres, verbose):
+def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, nms_thres, verbose, device):
     """Evaluate model on validation dataset.
 
     :param model: Model to evaluate
@@ -71,8 +71,6 @@ def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, n
     """
     model.eval()  # Set model to evaluation mode
 
-    Tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor
-
     labels = []
     sample_metrics = []  # List of tuples (TP, confs, pred)
 
@@ -83,10 +81,10 @@ def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, n
         targets[:, 2:] = xywh2xyxy(targets[:, 2:])
         targets[:, 2:] *= img_size
 
-        imgs = Variable(imgs.type(Tensor), requires_grad=False)
+        imgs = Variable(imgs.to(device, non_blocking=True), requires_grad=False)
 
         with torch.no_grad():
-            outputs = model(imgs)
+            outputs = model(imgs, training=False)
             outputs = non_max_suppression(outputs, conf_thres=conf_thres, iou_thres=nms_thres)
 
         sample_metrics += get_batch_statistics(outputs, targets, iou_threshold=iou_thres)
@@ -109,6 +107,7 @@ def _evaluate(model, dataloader, class_names, img_size, iou_thres, conf_thres, n
 def run():
     parser = argparse.ArgumentParser(description="Evaluate validation data.")
 
+    parser.add_argument('--cuda_id', type=int, default=0, help="使用的gpu")
     parser.add_argument("-w", "--weight_path", type=str, default="/Users/weimingan/work/weights/yolov3_voc_1100.pth",
                         help="权重文件")
     parser.add_argument("-b", "--batch_size", type=int, default=8)
@@ -124,6 +123,10 @@ def run():
     parser.add_argument("--nms_thres", type=float, default=0.4, help="IOU threshold for non-maximum suppression")
     args = parser.parse_args()
     print(f"Command line arguments: {args}")
+
+    # 选择使用的设备
+    cuda_name = 'cuda:' + str(args.cuda_id)
+    device = torch.device(cuda_name if torch.cuda.is_available() else 'cpu')
 
     # 数据集配置
     with open(args.data, errors='ignore') as f:
@@ -143,7 +146,7 @@ def run():
     model.load_state_dict(torch.load(args.weight_path, map_location=device))
     # 创建dataloader
     dataloader, dataset_len = _create_validation_data_loader(
-        label_path=data_params['targets'][2],  # 测试数据集
+        label_path=data_params['targets'][1],  # 验证数据集
         img_home=data_params['img_home'],
         input_shape=args.input_shape,
         batch_size=args.batch_size,
@@ -157,7 +160,8 @@ def run():
         iou_thres=args.iou_thres,
         conf_thres=args.conf_thres,
         nms_thres=args.nms_thres,
-        verbose=True)
+        verbose=True,
+        device=device)
 
     precision, recall, AP, f1, ap_class = metrics_output
 

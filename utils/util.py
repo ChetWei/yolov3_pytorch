@@ -375,6 +375,25 @@ def get_batch_statistics(outputs, targets, iou_threshold):
         batch_metrics.append([true_positives, pred_scores, pred_labels])
     return batch_metrics
 
+import argparse
+
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+
+def update_lr(optimizer, lr):
+    #  更新学习率
+    for g in optimizer.param_groups:
+        g['lr'] = lr
+
+
 if __name__ == '__main__':
     pass
     #print_environment_info()
